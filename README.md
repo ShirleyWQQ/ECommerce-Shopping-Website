@@ -1,11 +1,11 @@
 # CS348 Course Project
-In order to create our sample table and insert into it, we first need to login onto MySQL Command Line Client. Then we execute the following commands:
+**In order to create our sample table and insert into it, we first need to login onto MySQL Command Line Client. Then we execute the following commands:**
 
 CREATE DATABASE products;
 USE products;
 CREATE TABLE product(pid DECIMAL(6, 0) NOT NULL PRIMARY KEY, pname VARCHAR(20), price DECIMAL(5, 2), rating DECIMAL(1, 0));
 
-to insert into it we do:
+**to insert into it we do:**
 
 INSERT INTO product VALUES(000001, 'apple', 5.00, 4);
 INSERT INTO product VALUES(000002, 'pear', 9.00, 5);
@@ -18,11 +18,11 @@ INSERT INTO product VALUES(000008, 'badminton net', 15.00, 2);
 INSERT INTO product VALUES(000009, 'soccer ball', 25.00, 4);
 INSERT INTO product VALUES(000010, 'pen', 1.00, 4);
 
-To view result:
+**To view result:**
 
 SELECT * FROM product;
 
-The result of the above comands are:
+**The result of the above comands are:**
 
 +-----+---------------+-------+--------+
 | pid | pname         | price | rating |

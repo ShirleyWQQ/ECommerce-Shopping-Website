@@ -22,7 +22,7 @@ app.post("/", (req, res) => {
   res.send(req.body.hello);
 });
 app.get("/status", (req, res) => {
-  res.send("Server is running...");
+  res.send(`Server is running on port ${PORT}`);
 });
 
 app.use("/api", router);

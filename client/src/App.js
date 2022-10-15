@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import Item from "./components/Item";
+import ServerCheck from "./components/ServerCheck";
 
 function App() {
   return (
     <div className="App">
-      <Item name="User"></Item>
+      <ServerCheck></ServerCheck>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

@@ -10,18 +10,18 @@ CREATE TABLE User (
   password TEXT NOT NULL
 );
 CREATE TABLE Admin (
-  admin_id INT NOT NULL REFERENCES User(admin_id),
+  admin_id INT NOT NULL REFERENCES User(user_id),
   PRIMARY KEY(admin_id)
 );
 CREATE TABLE Category (
   category_id INT NOT NULL PRIMARY KEY,
-  category_name VARCHAR(30)
+  category_name VARCHAR(30) NOT NULL
 );
 CREATE TABLE Product (
   product_id INT NOT NULL PRIMARY KEY,
   description TEXT NOT NULL,
-  price DECIMAL(5, 2),
-  product_rating DECIMAL(2, 1),
+  price DECIMAL(6, 2) NOT NULL,
+  product_rating DECIMAL(2, 1) NOT NULL,
   picture_source TEXT NOT NULL,
   product_name TEXT NOT NULL
 );
@@ -34,8 +34,8 @@ CREATE TABLE CategoryProduct (
 );
 CREATE TABLE Comment (
   comment_id INT NOT NULL PRIMARY KEY,
-  rating INT UNSIGNED,
-  updated_time TIMESTAMP,
+  rating INT NOT NULL,
+  updated_time TIMESTAMP NOT NULL,
   content TEXT NOT NULL,
   user_id INT NOT NULL,
   product_id INT NOT NULL,

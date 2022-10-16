@@ -1,17 +1,19 @@
-/* create product table */
-CREATE TABLE product(pid DECIMAL(6, 0) NOT NULL PRIMARY KEY, description TEXT NOT NULL,  
-price DECIMAL(5, 2), rating DECIMAL(2, 0), picture_source VARCHAR(100) NOT NULL, pname VARCHAR(100), 
+
+CREATE TABLE product(product_id DECIMAL(6, 0) NOT NULL PRIMARY KEY, 
+description TEXT NOT NULL,  
+price DECIMAL(6, 2) NOT NULL, 
+rating DECIMAL(2, 1) NOT NULL, 
+picture_source TEXT NOT NULL, 
+product_name TEXT NOT NULL, 
 check (rating >= 0 and rating <= 5 and price >= 0));
 
 select * from product;
 
 /* create Category and CategoryProduct tables */
-DROP TABLE Category;
 CREATE TABLE Category(category_id INT NOT NULL PRIMARY KEY, category_name VARCHAR(30));
 
 /*DROP TABLE CategoryProduct;*/
-DROP TABLE CategoryProduct;
-CREATE TABLE CategoryProduct(pid DECIMAL(6, 0) NOT NULL PRIMARY KEY, categoryId INT);
+CREATE TABLE CategoryProduct(product_id DECIMAL(6, 0) NOT NULL PRIMARY KEY, category_id INT);
 
 /* list products with their category */
 SELECT * FROM Category;
@@ -58,14 +60,14 @@ SELECT * FROM Category;
 SELECT * FROM CategoryProduct;
 
 /* Lookup a product by its product_id */
-SELECT * FROM product where pid = 1;
+SELECT * FROM product where product_id = 1;
 
 /* Return all products that belong to a specific selected category/multiple selected categories */
 SELECT * FROM Product
-WHERE pid in (SELECT pid FROM CategoryProduct WHERE categoryId = 1);
+WHERE product_id in (SELECT product_id FROM CategoryProduct WHERE category_id = 1);
 
 SELECT * FROM Product
-WHERE pid in (SELECT pid FROM CategoryProduct WHERE categoryId = 4 or categoryId = 5);
+WHERE product_id in (SELECT product_id FROM CategoryProduct WHERE category_id = 4 or category_id = 5);
 
 /* Return all products that belong to a specific price range */
 SELECT * FROM product where (price >= 15 and price <= 20);
@@ -81,28 +83,28 @@ SELECT * FROM product ORDER BY price DESC;
 
 /* Sort all products in the selected category/categories by price */
 SELECT * FROM product WHERE
-pid in (SELECT pid FROM CategoryProduct WHERE categoryId = 1) ORDER BY price ASC;
+product_id in (SELECT product_id FROM CategoryProduct WHERE category_id = 1) ORDER BY price ASC;
 SELECT * FROM product WHERE
-pid in (SELECT pid FROM CategoryProduct WHERE categoryId = 4 or categoryId = 5) ORDER BY price DESC;
+product_id in (SELECT product_id FROM CategoryProduct WHERE category_id = 4 or category_id = 5) ORDER BY price DESC;
 
 /* Sort all products in the selected category/categories by rating */
 SELECT * FROM product WHERE
-pid in (SELECT pid FROM CategoryProduct WHERE categoryId = 1) ORDER BY rating ASC;
+product_id in (SELECT product_id FROM CategoryProduct WHERE category_id = 1) ORDER BY rating ASC;
 SELECT * FROM product WHERE
-pid in (SELECT pid FROM CategoryProduct WHERE categoryId = 4 or categoryId = 5) ORDER BY rating DESC;
+product_id in (SELECT product_id FROM CategoryProduct WHERE category_id = 4 or category_id = 5) ORDER BY rating DESC;
 
 /* Sort all products in the selected price range(s) by rating */
 SELECT * FROM product WHERE
-pid in (SELECT pid FROM CategoryProduct WHERE (price >= 0 and price <= 20)) ORDER BY rating ASC;
+product_id in (SELECT product_id FROM CategoryProduct WHERE (price >= 0 and price <= 20)) ORDER BY rating ASC;
 SELECT * FROM product WHERE
-pid in (SELECT pid FROM CategoryProduct WHERE (price >= 0 and price <= 15)) ORDER BY rating DESC;
+product_id in (SELECT product_id FROM CategoryProduct WHERE (price >= 0 and price <= 15)) ORDER BY rating DESC;
 
 /*Return all products in the selected category/categories in the selected price range(s), 
 sorted by rating (both asc/desc) */
 SELECT * FROM product WHERE
-pid in (SELECT pid FROM CategoryProduct WHERE (price >= 0 and price <= 20 and categoryId = 1)) 
+product_id in (SELECT product_id FROM CategoryProduct WHERE (price >= 0 and price <= 20 and category_id = 1)) 
 ORDER BY rating ASC;
 
 SELECT * FROM product WHERE
-pid in (SELECT pid FROM CategoryProduct WHERE (price >= 0 and price <= 100 and 
-(categoryId = 4 or categoryId = 5))) ORDER BY rating DESC;
+product_id in (SELECT product_id FROM CategoryProduct WHERE (price >= 0 and price <= 100 and 
+(category_id = 4 or category_id = 5))) ORDER BY rating DESC;

@@ -22,15 +22,15 @@
 
 
 create table Comment
-(cid decimal (4,0) not null primary key,
+(comment_id decimal (4,0) not null primary key,
 rating int signed,
-updated timestamp,
+updated_time timestamp,
 content text not null,
-pid decimal (4,0) not null,
-uid decimal (4,0) not null,
-foreign key (uid) references user(uid) on delete cascade,
-foreign key (pid) references product(pid) on delete cascade,
-unique key(uid, pid), -- each user can only comment the product once
+product_id decimal (4,0) not null,
+user_id decimal (4,0) not null,
+foreign key (user_id) references user(user_id) on delete cascade,
+foreign key (product_id) references product(product_id) on delete cascade,
+unique key(user_id, product_id), -- each user can only comment the product once
 check (rating>= 0 and rating <= 5));
 
 insert into Comment values
@@ -42,7 +42,7 @@ insert into Comment values
 
 update Comment set
 	content = 'update',
-    updated = now()
-    where cid = 1;
+    updated_time = now()
+    where comment_id = 1;
     
-select * from Comment where pid = 1;
+select * from Comment where product_id = 1;

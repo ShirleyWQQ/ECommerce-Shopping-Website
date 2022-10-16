@@ -4,7 +4,7 @@ create table User
 profile text not null,
 user_name VARCHAR (20) not null,
 password text not null);
-
+ 
 
 -- Create Admin Table
 CREATE TABLE Admin

@@ -27,11 +27,9 @@
     Connected to MySQL server
     ```
 ## Common Problem
-1. npm is not a command
-    - Makesure npm has been added to system PATH
-2. node is not a command
-    - Makesure node has been added to system PATH
-3. Failed to start: `Access denied for user`
+1. XXX is not a command
+    - Makesure the correpdonding program has been added to system PATH
+2. Failed to start: `Access denied for user`
     - Update `/src/database/sql.js`
     - Replace the following part with the value in `.env`
         ```

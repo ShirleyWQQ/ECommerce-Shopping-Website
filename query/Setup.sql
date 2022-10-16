@@ -1,5 +1,5 @@
--- Create the database
-DROP DATABASE project;
+-- Drop existing table (uncomment if you need to re-create from fresh)
+-- DROP DATABASE project;
 CREATE DATABASE project;
 USE project;
 -- Create each table
@@ -48,47 +48,48 @@ CREATE TABLE Comment (
     AND rating <= 5
   )
 );
+-- Create TRIGGER
 
 -- Import sample data into the tables, please read through the comment below for instructions
-
 -- Run the query below, check the output
 SHOW VARIABLES LIKE "secure_file_priv";
-/* If you have NULL, use Method 1. Else, use Method 2
+/* If you have NULL, use Method 1; else, use Method 2
    both assumes you are working in MySQL Workbench) */
 /* Method 1:
-   Add the following to Connection setting > Advanced */
+   Add the following to Connection > Advanced > Other
+     accessed via right-click on wrench button on Workbench start page and select corresponding connection */
 --OPT_LOCAL_INFILE=1
 /* Close current connection, open a new one
    Execute the following query */
 --SET GLOBAL local_infile = "ON";
 --SHOW VARIABLES LIKE "local_infile";
 /* You should see `local_infile` as `ON`
-   Find the aboslute path to the correponding sample files, replace the path in the LOAD DATA query
-   Modify the query to `LOAD DATA LOCAL INFILE`  */
+   Find the aboslute path to the correponding sample files, replace the path in the LOAD DATA queries
+   Modify the query to `LOAD DATA LOCAL INFILE` */
 
 /* Method 2
    Locate the folder indicated by secure_file_priv
-   Copy the datafile into it
-   Copy the sample data file into the folder
+   Copy the datafile in /sample into the folder
    Update the path of LOAD DATA queries to the folder path
    Replace "/"" instead of "\"" in the path */
 
 -- Load User/Admin
-LOAD DATA INFILE "REPLACE_YOUR_PATH/User.txt" INTO TABLE User;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Admin.txt" INTO TABLE Admin;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/User.txt" INTO TABLE User;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Admin.txt" INTO TABLE Admin;
 -- Load Category
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Category.txt" INTO TABLE Category;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Category.txt" INTO TABLE Category;
 -- Load Product
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Shirley_Fruit.txt" INTO TABLE Product;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Sara_BabyProduct.txt" INTO TABLE Product;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Colby_Vegetable.txt" INTO TABLE Product;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Daniel_Drink.txt" INTO TABLE Product;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Peter_Skincare.txt" INTO TABLE Product;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Shirley_Fruit.txt" INTO TABLE Product;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Sara_BabyProduct.txt" INTO TABLE Product;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Colby_Vegetable.txt" INTO TABLE Product;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Daniel_Drink.txt" INTO TABLE Product;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Peter_Skincare.txt" INTO TABLE Product;
 -- Load CategoryProduct
-LOAD DATA INFILE "REPLACE_YOUR_PATH/CategoryProduct.txt" INTO TABLE CategoryProduct;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/CategoryProduct.txt" INTO TABLE CategoryProduct;
 -- Load Comment
-LOAD DATA LOCAL INFILE "REPLACE_YOUR_PATH/Comment.txt" INTO TABLE Comment;
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Comment.txt" INTO TABLE Comment;
 
+-- Some simple select to validate result
 SELECT * FROM User;
 SELECT * FROM Admin;
 SELECT * FROM Product;

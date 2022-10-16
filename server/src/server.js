@@ -14,7 +14,7 @@ app.use(express.json())
 
 // Routing
 app.get("/", (req, res) => {
-  res.send("Hello World!")
+  res.send("Server is running.")
 });
 app.post("/", (req, res) => {
   console.log(req.body);

@@ -3,9 +3,16 @@ DROP DATABASE project;
 CREATE DATABASE project;
 USE project;
 -- Create each table
--- // TODO: Placeholder, waiting for Daniel
-CREATE TABLE User (user_id INT NOT NULL PRIMARY KEY);
--- // 
+CREATE TABLE User (
+  user_id INT NOT NULL PRIMARY KEY,
+  profile TEXT NOT NULL,
+  user_name VARCHAR(20) NOT NULL,
+  password TEXT NOT NULL
+);
+CREATE TABLE Admin (
+  admin_id INT NOT NULL REFERENCES User(admin_id),
+  PRIMARY KEY(admin_id)
+);
 CREATE TABLE Category (
   category_id INT NOT NULL PRIMARY KEY,
   category_name VARCHAR(30)
@@ -36,24 +43,29 @@ CREATE TABLE Comment (
   FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE,
   -- each user can only comment the product once
   UNIQUE KEY(user_id, product_id),
-  check (
+  CHECK (
     rating >= 0
-    and rating <= 5
+    AND rating <= 5
   )
 );
-
 -- Import sample data into the tables
 SHOW VARIABLES LIKE "secure_file_priv";
 -- Above query will return you the "import" folder of MySQL
 --   Copy the sample data file into this folder
---   Update the folder path below and run the query to import the dataset into tables
+--   Update the folder path (REPLACE_YOUR_PATH) below and run the query to import the dataset into tables
 --   USE '/' instead of '\' in the path
 
--- ID 100+
-LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Shirley - Fruit.txt" INTO TABLE product;
--- ID 200+
-LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Sara - Baby Product.txt" INTO TABLE product;
--- ID 300+
-LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Colby - Vegetable.txt" INTO TABLE product;
--- ID 400`+
-LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Peter - Skincare.txt" INTO TABLE product;
+-- Product
+LOAD DATA INFILE "REPLACE_YOUR_PATH/Shirley_Fruit.txt" INTO TABLE Product;
+LOAD DATA INFILE "REPLACE_YOUR_PATH/Sara_BabyProduct.txt" INTO TABLE Product;
+LOAD DATA INFILE "REPLACE_YOUR_PATH/Colby_Vegetable.txt" INTO TABLE Product;
+LOAD DATA INFILE "REPLACE_YOUR_PATH/Daniel_Drink.txt" INTO TABLE Product;
+LOAD DATA INFILE "REPLACE_YOUR_PATH/Peter_Skincare.txt" INTO TABLE Product;
+
+-- User/Admin
+LOAD DATA INFILE "REPLACE_YOUR_PATH/User.txt" INTO TABLE User;
+LOAD DATA INFILE "REPLACE_YOUR_PATH/Admin.txt" INTO TABLE Admin;
+
+SELECT * FROM User;
+SELECT * FROM Admin;
+SELECT * FROM Product;

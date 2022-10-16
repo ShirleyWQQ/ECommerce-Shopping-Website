@@ -47,7 +47,7 @@
 -- formula to calculate new rating after insert
 -- (old avg rating * (# ratings - 1) + new customer rating) / (# ratings)
 delimiter $$
-create trigger update_product_rating
+create trigger update_product_rating_on_insert
 after insert on Comment
 for each row
 begin
@@ -69,7 +69,7 @@ delimiter ;
 -- formula to calculate new rating after insert
 -- (old avg rating * (# ratings + 1) - old customer rating) / (# ratings)
 delimiter $$
-create trigger update_product_rating1a
+create trigger update_product_rating_on_delete
 after delete on Comment
 for each row
 begin
@@ -92,7 +92,7 @@ delimiter ;
 -- (old avg rating * # ratings + (new customer rating - old avg rating)) 
 -- / (# ratings)
 delimiter $$
-create trigger update_product_rating2
+create trigger update_product_rating_on_update
 after update on Comment
 for each row
 begin

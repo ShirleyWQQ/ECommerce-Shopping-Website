@@ -1,8 +1,4 @@
--- Create the database
-DROP DATABASE project;
-CREATE DATABASE project;
 USE project;
--- Create each table
 CREATE TABLE User (
   user_id INT NOT NULL PRIMARY KEY,
   profile TEXT NOT NULL,
@@ -48,24 +44,3 @@ CREATE TABLE Comment (
     AND rating <= 5
   )
 );
--- Import sample data into the tables
-SHOW VARIABLES LIKE "secure_file_priv";
--- Above query will return you the "import" folder of MySQL
---   Copy the sample data file into this folder
---   Update the folder path (REPLACE_YOUR_PATH) below and run the query to import the dataset into tables
---   USE '/' instead of '\' in the path
-
--- Product
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Shirley_Fruit.txt" INTO TABLE Product;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Sara_BabyProduct.txt" INTO TABLE Product;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Colby_Vegetable.txt" INTO TABLE Product;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Daniel_Drink.txt" INTO TABLE Product;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Peter_Skincare.txt" INTO TABLE Product;
-
--- User/Admin
-LOAD DATA INFILE "REPLACE_YOUR_PATH/User.txt" INTO TABLE User;
-LOAD DATA INFILE "REPLACE_YOUR_PATH/Admin.txt" INTO TABLE Admin;
-
-SELECT * FROM User;
-SELECT * FROM Admin;
-SELECT * FROM Product;

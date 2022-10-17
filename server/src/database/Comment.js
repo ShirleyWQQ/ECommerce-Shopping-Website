@@ -1,21 +1,23 @@
 const sql = require("./sql");
 
 // Product class that helps handle data within product table
-module.exports = class Product {
+
+module.exports = class Comment {
   /**
    * Retrieve all records in the product table
    * @param {databaseCallback} callback 
    */
-  static getAll(callback) {
-    sql.execute("select * from product;", (err, results, fields) => {
-      if (err) console.error(err);
-      console.log(`Selected ${results.length} rows`);
-      callback(err, results);
-    });
-  }
-  static getById(product_id, callback) {
-    const query = "SELECT * FROM Product WHERE product_id = ?";
+  static getByProductId(product_id, callback) {
+    const query = "SELECT * FROM Comment WHERE product_id = ?";
     const insert = [product_id];
+    sql.execute(query, insert, (err, results) => {
+      if (err) console.error(err); 
+      callback(err, results);
+    })
+  }
+  static getByUserId(user_id, callback) {
+    const query = "SELECT * FROM Comment WHERE user_id = ?";
+    const insert = [user_id];
     sql.execute(query, insert, (err, results) => {
       if (err) console.error(err); 
       callback(err, results);

@@ -1,18 +1,14 @@
 const express = require('express');
-const Product = require("./database/Product");
+const ProductController = require("./controllers/ProductController");
+const CommentController = require("./controllers/CommentController");
 
 const router = express.Router();
 
-router.get("/products", async (req, res) => {
-  // should call controler if we need more modularization
-  Product.getAll((err, results) => {
-    if (err) {
-      res.status(500);
-      return res.send("Database connection error");
-    }
-    res.status(200);
-    return res.send(results);
-  });
-});
+router.get("/products", ProductController.getAllProduct);
+router.get("/product/:product_id", ProductController.getProductById);
+
+router.get("/product/:product_id/comments", CommentController.getByProductId);
+
+router.get("/user/:user_id/comments", CommentController.getByUserId);
 
 module.exports = router;

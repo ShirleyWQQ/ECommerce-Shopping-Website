@@ -47,7 +47,7 @@
 -- formula to calculate new rating after insert
 -- (old avg rating * (# ratings - 1) + new customer rating) / (# ratings)
 delimiter $$
-create trigger update_product_rating
+create trigger update_product_rating_on_insert
 after insert on Comment
 for each row
 begin
@@ -65,12 +65,34 @@ begin
 end $$
 delimiter ;
 
+-- trigger to update the rating of a product when a comment is removed
+-- formula to calculate new rating after insert
+-- (old avg rating * (# ratings + 1) - old customer rating) / (# ratings)
+delimiter $$
+create trigger update_product_rating_on_delete
+after delete on Comment
+for each row
+begin
+    set @var := (((select rating from product where product_id = old.product_id)
+        *
+        ((select count(*) from Comment where product_id = old.product_id) + 1)
+        - old.rating)
+        /
+        (select count(*) from Comment where product_id = old.product_id));
+	if (old.rating > 0) then
+		update product
+		set rating = round(@var, 1)
+        where product_id = old.product_id;
+	end if;
+end $$
+delimiter ;
+
 -- trigger to update the rating of a product when a comment is updated
 -- formula to calculate new rating after insert
 -- (old avg rating * # ratings + (new customer rating - old avg rating)) 
 -- / (# ratings)
 delimiter $$
-create trigger update_product_rating2
+create trigger update_product_rating_on_update
 after update on Comment
 for each row
 begin
@@ -114,4 +136,5 @@ where product_id = 1;
 -- where product_id = 3;
 
 -- select rating from product where product_id = 3;
+
 

@@ -34,15 +34,13 @@ unique key(user_id, product_id), -- each user can only comment the product once
 check (rating>= 0 and rating <= 5));
 
 insert into Comment values
-(1, 3.5, '2020-10-14 10:20:00', "very good", 1, 1);
-
-insert into Comment values
-(2, 4.5, "2021-10-11 10:10:10", "I love it", 1, 2);
-
+(201, 4, '2020-10-14 10:20:00', "very good", 100, 308);
 
 update Comment set
 	content = 'update',
     updated_time = now()
-    where comment_id = 1;
+    where comment_id = 201;
     
-select * from Comment where product_id = 1;
+select * from Comment 
+	where product_id = 100;
+    

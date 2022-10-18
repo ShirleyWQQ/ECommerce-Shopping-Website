@@ -20,7 +20,7 @@ export default class ServerCheck extends React.Component {
 
   render() {
     return (
-      <div style={{ position: "absolute", right: 0, width: 300, padding: 10, backgroundColor: "LightGreen" }}>
+      <div style={{ padding: 10, backgroundColor: "LightGreen" }}>
         <button onClick={this.getServerStatus}>Check Server</button><br />
         <i><b>{this.state.serverStatus}</b></i><br />
       </div>

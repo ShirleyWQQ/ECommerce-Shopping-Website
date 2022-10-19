@@ -1,21 +1,24 @@
 import React from "react";
-import Axios from "axios";
 
 export default class ProductFilters extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { selected: "0" };
+  }
+  handleSelectChange = (event) => {
+    this.setState({ selected: event.target.value });
+    this.props.handleSelection(event.target.value);
   }
 
   render() {
     return (
-      <div style={{ padding: 10}}>
+      <div style={{ padding: 10 }}>
         <label> Choose a filter: </label>
-        <select id="filter-products">
-            <option>None</option>
-            <option value="">Order items based on Price ascending</option>
-            <option value="">Display items with rating &gt;1 </option>
-            <option value="">Display items with rating &gt;2 </option>
+        <select id="filter-products" value={this.state.selected} onChange={this.handleSelectChange}>
+          <option value="0">None</option>
+          <option value="1">Order items based on Price ascending</option>
+          <option value="2">Display items with rating &gt;1 </option>
+          <option value="3">Display items with rating &gt;2 </option>
         </select>
       </div>
     );

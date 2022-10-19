@@ -2,13 +2,11 @@
 import './App.css';
 import ServerCheck from "./components/ServerCheck";
 import ProductsPage from "./components/ProductsPage";
-import ProductFilters from './components/ProductFilters';
 
 function App() {
   return (
     <div className="App">
       <ServerCheck></ServerCheck>
-      <ProductFilters></ProductFilters>
       <ProductsPage></ProductsPage>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

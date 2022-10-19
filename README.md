@@ -13,6 +13,15 @@
 ```
 
 ## Setting up the project
-Follow the `README.md` in each of the folder to setup
+- Follow the `README.md` in each of the folder to setup the corredponding part
+- `client` for the frontend UI
+- `server` for the backend server
+- `query` for MySQL database, initialization of tables and sample data.
 
 ## Currenlty Supported Feature
+- Listing of product
+- Deletion of product
+- Filtering of products
+  - By a fixed rating range
+- Ordering products
+  - By price ascending

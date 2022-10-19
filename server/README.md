@@ -30,8 +30,8 @@
 1. XXX is not a command
     - Makesure the correpdonding program has been added to system PATH
 2. Failed to start: `Access denied for user`
-    - Update `/src/database/sql.js`
-    - Replace the following part with the value in `.env`
+    - Locate `/src/database/sql.js`
+    - Replace `process.env.XXX` in the following part with the value in `.env` of `sql.js`
         ```
         host: process.env.DATABASE_HOST,
         user: process.env.DATABASE_USER,

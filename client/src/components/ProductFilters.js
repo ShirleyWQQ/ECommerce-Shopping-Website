@@ -14,8 +14,8 @@ export default class ProductFilters extends React.Component {
         <select id="filter-products">
             <option>None</option>
             <option value="">Order items based on Price ascending</option>
-            <option value="">Display items with rating &gt;3 </option>
-            <option value="">Display items with rating &gt;4 </option>
+            <option value="">Display items with rating &gt;1 </option>
+            <option value="">Display items with rating &gt;2 </option>
         </select>
       </div>
     );

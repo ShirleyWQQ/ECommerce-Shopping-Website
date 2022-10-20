@@ -8,6 +8,7 @@
 │   └── README.md           # Instruction on setting up sample data
 ├── server                  # Root folder for server (backend)
 │   └── README.md           # Instruction on starting the server
+├── notes                   # Notes and images from meeting and discussions
 ├── TODO.md
 └── README.md
 ```

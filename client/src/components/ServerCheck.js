@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import Button from "react-bootstrap/Button"
 
 export default class ServerCheck extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ export default class ServerCheck extends React.Component {
   render() {
     return (
       <div style={{ padding: 10, backgroundColor: "LightGreen" }}>
-        <button onClick={this.getServerStatus}>Check Server</button><br />
+        <Button onClick={this.getServerStatus}>Check Server</Button><br />
         <i><b>{this.state.serverStatus}</b></i><br />
       </div>
     );

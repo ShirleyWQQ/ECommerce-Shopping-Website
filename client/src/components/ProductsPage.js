@@ -1,6 +1,7 @@
 import React from "react";
 import Axios from "axios";
 import './ProductsPage.css';
+import ProductFilters from "./ProductFilters";
 // React calls componentDidMount twice in dev mode
 export default class ServerCheck extends React.Component {
   constructor(props) {
@@ -12,11 +13,14 @@ export default class ServerCheck extends React.Component {
     this.getProduct();
   }
   // Handler
-  handleSelectChange = (event) => {
-    this.setState({ selected: event.target.value });
-    this.getProduct(event.target.value);
+  handleSelectChange = (index) => {
+    debugger;
+    console.log("index"+index);
+    this.setState({ selected: index });
+    this.getProduct(`${index}`);
   }
   getProduct = (selected) => {
+    debugger;
     let url = "http://localhost:3001/api/products";
     switch (selected) {
       case "1": // order price asec
@@ -54,15 +58,7 @@ export default class ServerCheck extends React.Component {
   render() {
     return (
       <div>
-        <div style={{ padding: 10 }}>
-          <label> Choose a filter: </label>
-          <select id="filter-products" value={this.state.selected} onChange={this.handleSelectChange}>
-            <option value="0">None</option>
-            <option value="1">Order items based on Price ascending</option>
-            <option value="2">Display items with rating &gt;1 </option>
-            <option value="3">Display items with rating &gt;2 </option>
-          </select>
-        </div>
+        <ProductFilters value={this.state.selected} onChange={this.handleSelectChange}/>
         <table>
           <tr>
             <th>Product Name</th>

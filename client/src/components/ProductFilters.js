@@ -1,26 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
-export default class ProductFilters extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { selected: "0" };
-  }
-  handleSelectChange = (event) => {
-    this.setState({ selected: event.target.value });
-    this.props.handleSelection(event.target.value);
-  }
+export default function ProductFilters(props) {
+  const [selectedItem, setSelectedItem] = useState("");
 
-  render() {
+
     return (
       <div style={{ padding: 10 }}>
-        <label> Choose a filter: </label>
-        <select id="filter-products" value={this.state.selected} onChange={this.handleSelectChange}>
-          <option value="0">None</option>
-          <option value="1">Order items based on Price ascending</option>
-          <option value="2">Display items with rating &gt;1 </option>
-          <option value="3">Display items with rating &gt;2 </option>
-        </select>
+            <Nav>
+              <NavDropdown
+                id="nav-dropdown-dark-example"
+                title="Dropdown"
+                menuVariant="dark"
+              >
+                {['None', 'Price ascending', 'Rating > 1', 'Rating > 2'].map((sortingName, index) => (
+                  <NavDropdown.Item onClick={() => props.onChange(index)}>
+                    {sortingName}
+                  </NavDropdown.Item>
+                ))}
+              </NavDropdown>
+            </Nav>
       </div>
     );
-  }
 }

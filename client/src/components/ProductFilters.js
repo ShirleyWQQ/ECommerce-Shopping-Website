@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 export default function ProductFilters(props) {
 
     return (
-      <div style={{ padding: 10, float: "right" }}>
+      <div style={{ padding: 10, marginLeft: 'auto', marginRight: 0 }}>
             <Nav>
               <NavDropdown
                 id="nav-dropdown-dark-example"

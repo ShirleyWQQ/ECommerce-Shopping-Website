@@ -14,22 +14,19 @@ export default class ServerCheck extends React.Component {
   }
   // Handler
   handleSelectChange = (index) => {
-    debugger;
-    console.log("index"+index);
     this.setState({ selected: index });
-    this.getProduct(`${index}`);
+    this.getProduct(index);
   }
   getProduct = (selected) => {
-    debugger;
     let url = "http://localhost:3001/api/products";
     switch (selected) {
-      case "1": // order price asec
+      case "Sort1": // order price asec
         url = `${url}?price=asec`;
         break;
-      case "2": // rating > 1
+      case "Rating1": // rating > 1
         url = `${url}?rating=1`
         break;
-      case "3": // rating > 2
+      case "Rating2": // rating > 2
         url = `${url}?rating=2`
         break;
       default:

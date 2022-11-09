@@ -1,22 +1,19 @@
 import React, { useState } from "react";
 import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default function ProductFilters(props) {
-  const [selectedItem, setSelectedItem] = useState("");
-
 
     return (
-      <div style={{ padding: 10 }}>
+      <div style={{ padding: 10, float: "right" }}>
             <Nav>
               <NavDropdown
                 id="nav-dropdown-dark-example"
-                title="Dropdown"
+                title="Sort"
                 menuVariant="dark"
               >
-                {['None', 'Price ascending', 'Rating > 1', 'Rating > 2'].map((sortingName, index) => (
-                  <NavDropdown.Item onClick={() => props.onChange(index)}>
+                {['None', 'Price ascending', 'Price descending', 'Rating ascending', 'Rating descending'].map((sortingName, index) => (
+                  <NavDropdown.Item onClick={() => props.onChange(`Sort${index}`)}>
                     {sortingName}
                   </NavDropdown.Item>
                 ))}

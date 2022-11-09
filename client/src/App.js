@@ -2,12 +2,14 @@
 import './App.css';
 import ServerCheck from "./components/ServerCheck";
 import ProductsPage from "./components/ProductsPage";
+import Counter from "./components/Counter";
 
 function App() {
   return (
     <div className="App">
       <ServerCheck></ServerCheck>
       <ProductsPage></ProductsPage>
+      <Counter></Counter>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

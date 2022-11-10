@@ -55,27 +55,29 @@ export default class ServerCheck extends React.Component {
   }
   render() {
     return (
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <ProductFilters value={this.state.selected} onChange={this.handleSelectChange}/>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <ProductFilterBar/>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <ProductFilters value={this.state.selected} onChange={this.handleSelectChange} />
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <ProductFilterBar />
           <table>
-            <tr>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Description</th>
-              <th>Rating</th>
-              <th>Delete product</th>
-            </tr>
-            {this.state.products.map(item => (
+            <tbody>
               <tr>
-                <td>{item.product_name}</td>
-                <td>${item.price}</td>
-                <td>{item.description}</td>
-                <td>{item.product_rating}</td>
-                <td><button onClick={() => this.deleteProduct(item.product_id)}>delete product</button></td>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Rating</th>
+                <th>Delete product</th>
               </tr>
-            ))}
+              {this.state.products.map(item => (
+                <tr key={item.product_id}>
+                  <td>{item.product_name}</td>
+                  <td>${item.price}</td>
+                  <td>{item.description}</td>
+                  <td>{item.product_rating}</td>
+                  <td><button onClick={() => this.deleteProduct(item.product_id)}>delete product</button></td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
       </div>

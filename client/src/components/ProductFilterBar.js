@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from 'react-bootstrap/Form';
 
 export default function ProductFilterBar(props) {
 
     return (
     <div style={{ minWidth: 200, paddingLeft: "30px"}}>
-        <p class="font-weight-bold">Filter by Rating</p>
+        <p className="font-weight-bold">Filter by Rating</p>
         <Form>
             <div>
             <Form.Check 

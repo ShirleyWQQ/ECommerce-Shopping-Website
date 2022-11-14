@@ -65,14 +65,14 @@ BEGIN
 END $$
 delimiter ;
 
-CREATE TABLE ShoppingCart (
-  user_id INT NOT NULL,
-  product_id INT NOT NULL,
-  quantity INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE,
-  FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE,
-  PRIMARY KEY (user_id, product_id),
-  CHECK (
-    quantity >= 0
-  )
-);
+-- Trigger to delete an element from shopping cart when quantity is about to go to 0
+delimiter $$
+CREATE TRIGGER DELETE_FROM_CART
+AFTER UPDATE ON ShoppingCart
+FOR EACH ROW
+BEGIN
+	IF (new.quantity = 0) THEN
+	Delete FROM ShoppingCart WHERE user_id = new.user_id AND product_id = new.product_id;
+	END IF;
+END $$
+delimiter ;

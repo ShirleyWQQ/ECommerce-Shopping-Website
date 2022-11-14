@@ -1,4 +1,5 @@
 const sql = require("./sql");
+const _ = require("lodash");
 
 // Product class that helps handle data within product table
 module.exports = class Product {
@@ -12,11 +13,16 @@ module.exports = class Product {
     if (options?.filter?.rating) {
       query += "WHERE product_rating > ?";
       insert = [options.filter.rating];
-    } else if (options?.sort?.price) {
-      query += "ORDER BY price ASC"
+    }
+    // Sorting options
+    if (_.isBoolean(options?.sort?.price)) {
+      query += `ORDER BY price ${options.sort.price ? "ASC" : "DESC"}`;
+    } else if (_.isBoolean(options?.sort?.rating)) {
+      query += `ORDER BY product_rating ${options.sort.rating ? "ASC" : "DESC"}`;
     }
     query += ";"
-    sql.execute
+    console.log(options);
+    console.log(`${query}`);
     sql.execute(query, insert, (err, results, fields) => {
       if (err) console.error(err);
       console.log(`Selected ${results.length} rows`);

@@ -15,22 +15,26 @@ export default class ServerCheck extends React.Component {
   }
   // Handler
   handleSelectChange = (index) => {
+    // Index based on ProductFilters sortOptions
     this.setState({ selected: index });
     this.getProduct(index);
   }
   getProduct = (selected) => {
     let url = "http://localhost:3001/api/products";
     switch (selected) {
-      case "Sort1": // order price asec
-        url = `${url}?price=asec`;
+      case 1: // Price ASC
+        url = `${url}?sortfield=price&sortorder=asc`;
         break;
-      case "Rating1": // rating > 1
-        url = `${url}?rating=1`
+      case 2: // Price DESC
+        url = `${url}?sortfield=price&sortorder=desc`;
         break;
-      case "Rating2": // rating > 2
-        url = `${url}?rating=2`
+      case 3: // Rating ASC
+        url = `${url}?sortfield=rating&sortorder=asc`;
         break;
-      default:
+      case 4: // Rating DESC
+        url = `${url}?sortfield=rating&sortorder=desc`;
+        break;
+      default: // NON
         url = "http://localhost:3001/api/products";
     }
     Axios.get(url)

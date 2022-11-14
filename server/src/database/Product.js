@@ -8,10 +8,13 @@ module.exports = class Product {
    * @param {databaseCallback} callback 
    */
   static getAll(options, callback) {
+    // Intial query
     let query = "SELECT * FROM product ";
+    // Insert query
     let insert = [];
+    // Filters
     if (options?.filter?.rating) {
-      query += "WHERE product_rating > ?";
+      query += "WHERE product_rating >= ?";
       insert = [options.filter.rating];
     }
     // Sorting options
@@ -21,8 +24,7 @@ module.exports = class Product {
       query += `ORDER BY product_rating ${options.sort.rating ? "ASC" : "DESC"}`;
     }
     query += ";"
-    console.log(options);
-    console.log(`${query}`);
+    console.debug(JSON.stringify(options));
     sql.execute(query, insert, (err, results, fields) => {
       if (err) console.error(err);
       console.log(`Selected ${results.length} rows`);

@@ -9,13 +9,20 @@ const supported = {
 };
 function getAllProduct(req, res) {
   const options = {};
-  // Validation
+  // Sort option
   const sortField = supported.sortFields.find(v => v === req.query.sortfield?.toLowerCase());
   let sortOrder = supported.sortOrder.find(v => v === req.query.sortorder?.toLowerCase());
   if (!sortOrder) sortOrder = "asc";
   if (sortField) {
     options.sort = { [sortField]: sortOrder === "asc" };
   }
+  // Rating filer
+  let rating = req.query.rating
+  if (rating && !_.isNaN(_.toNumber(rating))) {
+    rating = _.toNumber(rating);
+    options.filter = { rating };
+  }
+  // Call database
   Product.getAll(options, (err, results) => {
     if (err) {
       res.status(500);

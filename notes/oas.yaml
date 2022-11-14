@@ -1,6 +1,7 @@
 openapi: 3.0.3
 info:
   title: API
+  description: Use https://editor.swagger.io/ to view it with a nice UI
   version: 1.0.0
 servers:
   - url: http://localhost:3001

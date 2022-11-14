@@ -64,3 +64,15 @@ BEGIN
 	END IF;
 END $$
 delimiter ;
+
+-- Trigger to delete an element from shopping cart when quantity is about to go to 0
+delimiter $$
+CREATE TRIGGER DELETE_FROM_CART
+AFTER UPDATE ON ShoppingCart
+FOR EACH ROW
+BEGIN
+	IF (new.quantity = 0) THEN
+	Delete FROM ShoppingCart WHERE user_id = new.user_id AND product_id = new.product_id;
+	END IF;
+END $$
+delimiter ;

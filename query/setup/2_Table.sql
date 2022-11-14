@@ -52,6 +52,6 @@ CREATE TABLE ShoppingCart (
   FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE,
   PRIMARY KEY (user_id, product_id),
   CHECK (
-    quantity > 0
+    quantity >= 0
   )
 );

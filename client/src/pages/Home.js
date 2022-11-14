@@ -3,6 +3,7 @@ import ProductsPage from "../components/ProductsPage";
 import Counter from "../components/Counter";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import Table from "../components/Table";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ export default function Home() {
       <Counter></Counter>
       <ServerCheck></ServerCheck>
       <ProductsPage></ProductsPage>
+      <Table></Table>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 
 export default function ProductFilterBar(props) {
 
@@ -9,29 +9,29 @@ export default function ProductFilterBar(props) {
         <Form>
             <div>
             <Form.Check 
-            type='checkbox'
-            id="Rating > 1"
-            label="Rating > 1"
+            type="checkbox"
+            id="Rating>=1"
+            label="Rating>=1"
             />
             <Form.Check
-            type='checkbox'
-            id="Rating > 2"
-            label="Rating > 2"
+            type="checkbox"
+            id="Rating>=2"
+            label="Rating>=2"
             />
             <Form.Check
-            type='checkbox'
-            id="Rating > 3"
-            label="Rating > 3"
+            type="checkbox"
+            id="Rating>=3"
+            label="Rating>=3"
             />
             <Form.Check
-            type='checkbox'
-            id="Rating > 4"
-            label="Rating > 4"
+            type="checkbox"
+            id="Rating>=4"
+            label="Rating>=4"
             />
             <Form.Check
-            type='checkbox'
-            id="Rating >= 5"
-            label="Rating >= 5"
+            type="checkbox"
+            id="Rating>=5"
+            label="Rating>=5"
             />
             </div>
         </Form>

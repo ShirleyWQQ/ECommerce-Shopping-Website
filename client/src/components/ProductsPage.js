@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import './ProductsPage.css';
+import "./ProductsPage.css";
 import ProductFilters from "./ProductFilters";
 import ProductFilterBar from "./ProductFilterBar";
 // React calls componentDidMount twice in dev mode
@@ -59,9 +59,9 @@ export default class ServerCheck extends React.Component {
   }
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <ProductFilters value={this.state.selected} onChange={this.handleSelectChange} />
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <ProductFilterBar />
           <table>
             <tbody>

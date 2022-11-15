@@ -42,6 +42,9 @@ export default function ProductListPage() {
   const sortOnSelect = (sortIndex) => { setSortIndex(sortIndex); };
   const ratingOnSelect = (ratingIndex) => { setRatingIndex(ratingIndex); };
   const changeCategory = (categoryId) => {
+    selectedCategory.includes(categoryId)
+    ? setSelectedCategory(selectedCategory.filter(item => item != categoryId))
+    : setSelectedCategory([categoryId, ... selectedCategory]);
   };
   /* Dependent Method */
   const getProduct = useCallback(() => {

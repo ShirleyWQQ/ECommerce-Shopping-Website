@@ -10,7 +10,9 @@ export default function ProductCard(props) {
         <h5 className="card-title" id="para0">{props.name}</h5>
         <h5 className="card-title2">${props.price}</h5>
         <p className="card-text" id="para">{props.description}</p>
-        <Button>+</Button>
+        <div class="position-absolute bottom-0 end-0">
+          <Button>+</Button>
+        </div>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import NoPage from "./pages/NoPage"
 import ExamplePage from "./pages/ExamplePage";
 import ProductListPage from "./pages/ProductListPage";
-import LoginPage from "./pages/user/LoginPage";
+import LoginPage from "./pages/User/LoginPage";
 
 function App() {
   return (

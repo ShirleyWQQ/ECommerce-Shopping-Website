@@ -41,7 +41,6 @@ export default function ProductListPage(props) {
   /* Dependent Method */
   const getProduct = useCallback(() => {
     const url = getUrl(sortIndex, ratingIndex);
-    console.log(ratingIndex);
     Axios.get(url)
       .then(res => {
         setProducts(res.data);

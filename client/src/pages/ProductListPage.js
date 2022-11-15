@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from "react";
 // import ProductFilters from "../components/ProductFilters";
-// import ProductFilterBar from "../components/ProductFilterBar";
+import ProductSort from "../components/ProductSort";
 import ProductList from "../components/ProductList";
 import Axios from "axios";
-// return promise of axios
 
+const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
 export default class ProductListPage extends React.Component {
   constructor(props) {
     super(props);
+
+
     this.state = {
       products: [{ product_id: 1, product_name: "Mock", price: "0.00" }],
-      sortIndex: 0
+      sortIndex: 0, // Refer to sortOptions
     }
+  }
+  render() {
+    return (
+      <div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {/* <ProductFilters value={this.state.selected} onChange={this.handleSelectChange} /> */}
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <ProductSort sortOptions={sortOptions} onSelect={this.sortOnSelect} />
+            <ProductList data={this.state.products} />
+          </div>
+        </div>
+      </div>
+    );
   }
   componentDidMount() {
     this.getProduct();
@@ -42,17 +57,7 @@ export default class ProductListPage extends React.Component {
         alert("Failed to retrieve products");
       });
   }
-  render() {
-    return (
-      <div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* <ProductFilters value={this.state.selected} onChange={this.handleSelectChange} /> */}
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            {/* <ProductFilterBar /> */}
-            <ProductList data={this.state.products} />
-          </div>
-        </div>
-      </div>
-    );
+  sortOnSelect = (sortIndex) => {
+    this.getProduct(sortIndex);
   }
 }

@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
+//onChange prop used
 export default function ProductFilters(props) {
     const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
     return (

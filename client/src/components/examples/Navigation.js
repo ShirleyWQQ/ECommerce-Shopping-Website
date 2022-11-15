@@ -7,6 +7,7 @@ export default function Navigation() {
       <Button onClick={() => navigate("/")}>Go Home</Button>
       <Button onClick={() => navigate("/example")}>Go to Example</Button>
       <Button onClick={() => navigate("/404")}>Go to 404</Button>
+      <Button onClick={() => navigate("/login")}>Login</Button>
     </div>
   )
 }

@@ -7,14 +7,12 @@ import Table from "../components/Table";
 
 export default function Home() {
   const navigate = useNavigate();
-  const navigateLogin = useNavigate();
   return (
     <div>
       <Button onClick={() => navigate("/404")}>Go to 404</Button>
-      <Button onClick={() => navigateLogin("/UserLogin")}>User Login</Button>
+      <Button onClick={() => navigate("/UserLogin")}>User Login</Button>
       <Button onClick={() => navigate("/404")}>Shopping Cart</Button>
       <Header></Header>
-      <Button onClick={() => navigate("/404")}>Search</Button>
       <ServerCheck></ServerCheck>
       <ProductsPage></ProductsPage>
       <Table></Table>

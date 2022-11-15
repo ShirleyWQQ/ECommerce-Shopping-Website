@@ -1,6 +1,5 @@
 import React from "react";
 import Axios from "axios";
-import './ProductsPage.css';
 import Counter1 from "./Counter1"
 // React calls componentDidMount twice in dev mode
 export default class ServerCheck extends React.Component {

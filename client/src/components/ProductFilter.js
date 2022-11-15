@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import StarIcon from "../images/StarIcon";
 
 // props: selectedIndex, setSelectedIndex
-// props: categories
+// props: categories changeCategory
 export default function ProductFilter(props) {
   const handleSelectStarRating = (num) => {
     props.setSelectedIndex((num === props.selectedIndex) ? -1 : num);
@@ -55,7 +55,7 @@ export default function ProductFilter(props) {
               type="checkbox"
               id={item.category_id}
               label={item.category_name}
-              // onChange={()=> props.changeCategory(index)}
+              onChange={()=> props.changeCategory(index)}
             />
           ))}
         </div>

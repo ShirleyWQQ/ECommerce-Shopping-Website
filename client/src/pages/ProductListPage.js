@@ -74,7 +74,7 @@ export default function ProductListPage() {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} categories={categories} />
+          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} categories={categories} changeCategory={changeCategory}/>
           <ProductList data={products} />
         </div>
       </div>

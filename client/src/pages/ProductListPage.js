@@ -5,7 +5,7 @@ import ProductSort from "../components/ProductSort";
 import ProductFilter from "../components/ProductFilter";
 
 const baseUrl = "http://localhost:3001/api/products?";
-function getUrl(sortIndex, rating) {
+function getUrl(sortIndex, rating, categories) {
   let url = baseUrl;
   switch (sortIndex) {
     case 1: // Price ASC
@@ -25,23 +25,27 @@ function getUrl(sortIndex, rating) {
   if (rating > 0) {
     url = `${url}&rating=${rating}`;
   }
+  url = `${url}&category=${categories.join(",")}`;
   console.log(url);
   return url;
 }
 
 const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
-export default function ProductListPage(props) {
+export default function ProductListPage() {
   /* State */
   const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock Product", price: "0.00" }]);
   const [sortIndex, setSortIndex] = useState(0);
   const [ratingIndex, setRatingIndex] = useState(-1);
-  const [categories, setcategories] = useState([{ category_id: 1, category_name: "Mock Category" }]);
+  const [categories, setCategories] = useState([{ category_id: 1, category_name: "Mock Category" }]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
   /* Method */
   const sortOnSelect = (sortIndex) => { setSortIndex(sortIndex); };
   const ratingOnSelect = (ratingIndex) => { setRatingIndex(ratingIndex); };
+  const changeCategory = (categoryId) => {
+  };
   /* Dependent Method */
   const getProduct = useCallback(() => {
-    const url = getUrl(sortIndex, ratingIndex);
+    const url = getUrl(sortIndex, ratingIndex, selectedCategory);
     Axios.get(url)
       .then(res => {
         setProducts(res.data);
@@ -49,11 +53,11 @@ export default function ProductListPage(props) {
       .catch(err => {
         alert("Failed to retrieve products");
       });
-  }, [sortIndex, ratingIndex]);
+  }, [sortIndex, ratingIndex, selectedCategory]);
   const getCategory = useCallback(() => {
     Axios.get("http://localhost:3001/api/categories")
       .then(res => {
-        setcategories(res.data);
+        setCategories(res.data);
       })
       .catch(err => {
         alert("Failed to retrieve products");
@@ -70,7 +74,7 @@ export default function ProductListPage(props) {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} categories={categories} />
+          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} categories={categories} changeCategory={changeCategory}/>
           <ProductList data={products} />
         </div>
       </div>

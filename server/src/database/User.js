@@ -8,7 +8,7 @@ module.exports = class User {
    * @param {databaseCallback} callback 
    */
   static getUserByName(username, callback) {
-    const query = "SELECT * FROM User WHERE user_name = ?";
+    const query = "SELECT * FROM User  LEFT JOIN Admin ON user_id=admin_id WHERE user_name = ?";
     const insert = [username];
     sql.execute(query, insert, (err, results) => {
       if (err) console.error(err); 

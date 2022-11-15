@@ -8,6 +8,8 @@ export const userSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
+      state.user.isAdmin = !!state.user.admin_id;
+      console.log(action.payload);
     },
     logout: (state) => {
       state.user = null;
@@ -19,5 +21,6 @@ export const userSlice = createSlice({
 export const { login } = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
+export const selectIsAdmin = (state) => state.user.user?.isAdmin;
 
 export default userSlice.reducer;

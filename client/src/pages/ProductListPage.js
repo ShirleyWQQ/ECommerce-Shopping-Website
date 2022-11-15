@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-// import ProductFilters from "../components/ProductFilters";
-import ProductSort from "../components/ProductSort";
-import ProductList from "../components/ProductList";
+import React from "react";
 import Axios from "axios";
+import ProductList from "../components/ProductList";
+import ProductSort from "../components/ProductSort";
+import ProductFilterBar from "../components/ProductFilterBar";
 
 const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
 export default class ProductListPage extends React.Component {
   constructor(props) {
     super(props);
-
-
     this.state = {
       products: [{ product_id: 1, product_name: "Mock", price: "0.00" }],
       sortIndex: 0, // Refer to sortOptions
@@ -19,9 +17,9 @@ export default class ProductListPage extends React.Component {
     return (
       <div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* <ProductFilters value={this.state.selected} onChange={this.handleSelectChange} /> */}
+          <ProductSort sortOptions={sortOptions} onSelect={this.sortOnSelect} />
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <ProductSort sortOptions={sortOptions} onSelect={this.sortOnSelect} />
+            <ProductFilterBar onChange={() => { }} />
             <ProductList data={this.state.products} />
           </div>
         </div>

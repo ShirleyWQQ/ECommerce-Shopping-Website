@@ -11,6 +11,7 @@ export default function ProductList(props) {
           name={item.product_name}
           price={item.price}
           description={item.description}
+          image={item.picture_source}
           key={index}
         />
       ))}

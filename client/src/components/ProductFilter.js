@@ -50,11 +50,12 @@ export default function ProductFilter(props) {
       <p className="font-weight-bold">Filter by Rating</p>
       <Form>
         <div>
-          {props.categories.map((item) => (
+          {props.categories.map((item, index) => (
             <Form.Check
               type="checkbox"
               id={item.category_id}
               label={item.category_name}
+              // onChange={()=> props.changeCategory(index)}
             />
           ))}
         </div>

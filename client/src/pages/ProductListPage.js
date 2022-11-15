@@ -32,9 +32,10 @@ function getUrl(sortIndex, rating) {
 const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
 export default function ProductListPage(props) {
   /* State */
-  const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock", price: "0.00" }]);
+  const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock Product", price: "0.00" }]);
   const [sortIndex, setSortIndex] = useState(0);
   const [ratingIndex, setRatingIndex] = useState(-1);
+  const [categories, setcategories] = useState([{ category_id: 1, category_name: "Mock Category" }]);
   /* Method */
   const sortOnSelect = (sortIndex) => { setSortIndex(sortIndex); };
   const ratingOnSelect = (ratingIndex) => { setRatingIndex(ratingIndex); };
@@ -49,17 +50,27 @@ export default function ProductListPage(props) {
         alert("Failed to retrieve products");
       });
   }, [sortIndex, ratingIndex]);
+  const getCategory = useCallback(() => {
+    Axios.get("http://localhost:3001/api/categories")
+      .then(res => {
+        setcategories(res.data);
+      })
+      .catch(err => {
+        alert("Failed to retrieve products");
+      });
+  }, []);
   /* Hook */
   useEffect(() => {
     getProduct();
-  }, [getProduct]);
+    getCategory();
+  }, [getProduct, getCategory]);
   /* Render */
   return (
     <div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} />
+          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} categories={categories} />
           <ProductList data={products} />
         </div>
       </div>

@@ -14,7 +14,7 @@ module.exports = class Product {
     let insert = [];
     // Filters
     if (options?.filter?.rating) {
-      query += "WHERE product_rating >= ?";
+      query += "WHERE product_rating >= ? ";
       insert = [options.filter.rating];
     }
     // Sorting options
@@ -24,7 +24,7 @@ module.exports = class Product {
       query += `ORDER BY product_rating ${options.sort.rating ? "ASC" : "DESC"}`;
     }
     query += ";"
-    console.debug(JSON.stringify(options));
+    console.log(sql.format(query, insert));
     sql.execute(query, insert, (err, results, fields) => {
       if (err) console.error(err);
       console.log(`Selected ${results.length} rows`);

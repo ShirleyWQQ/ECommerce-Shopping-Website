@@ -8,7 +8,7 @@ const supported = {
   sortOrder: ["asc", "desc"]
 };
 function getAllProduct(req, res) {
-  const options = {};
+  const options = { filter: null };
   // Sort option
   const sortField = supported.sortFields.find(v => v === req.query.sortfield?.toLowerCase());
   let sortOrder = supported.sortOrder.find(v => v === req.query.sortorder?.toLowerCase());
@@ -20,7 +20,18 @@ function getAllProduct(req, res) {
   let rating = req.query.rating
   if (rating && !_.isNaN(_.toNumber(rating))) {
     rating = _.toNumber(rating);
-    options.filter = { rating };
+    if (!options.filter) options.filter = {};
+    options.filter.rating = rating;
+  }
+  // Category filter
+  let category = req.query.category;
+  if (category) {
+    category = category.split(",");
+    category = category.filter(v => !_.isNaN(_.toNumber(v)));
+    if (category.length > 0) {
+      if (!options.filter) options.filter = {};
+      options.filter.category = category;
+    }
   }
   // Call database
   Product.getAll(options, (err, results) => {

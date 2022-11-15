@@ -1,5 +1,6 @@
 const sql = require("./sql");
 const _ = require("lodash");
+const WHERE = "WHERE ";
 
 // Product class that helps handle data within product table
 module.exports = class Product {
@@ -9,13 +10,29 @@ module.exports = class Product {
    */
   static getAll(options, callback) {
     // Intial query
-    let query = "SELECT * FROM product ";
+    let query = "SELECT * FROM product NATURAL JOIN categoryProduct ";
     // Insert query
     let insert = [];
     // Filters
-    if (options?.filter?.rating) {
-      query += "WHERE product_rating >= ? ";
-      insert = [options.filter.rating];
+    if (options?.filter) {
+      let where = WHERE;
+      if (!_.isNil(options.filter.rating)) {
+        where += "product_rating >= ? ";
+        insert.push(options.filter.rating);
+      }
+      if (!_.isNil(options.filter.category)) {
+        if (where.length !== WHERE.length) where += "AND ";
+        let values = "";
+        for (let v of options.filter.category) {
+          values += `?,`;
+          insert.push(v);
+        }
+        if (values.length > 0) {
+          values = values.slice(0, values.length - 1);
+          where += `category_id in (${values})`;
+        }
+      }
+      if (where.length !== WHERE.length) query += where;
     }
     // Sorting options
     if (_.isBoolean(options?.sort?.price)) {

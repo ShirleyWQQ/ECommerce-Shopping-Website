@@ -1,6 +1,7 @@
 const express = require('express');
 const ProductController = require("./controllers/ProductController");
 const CommentController = require("./controllers/CommentController");
+const CategoryController = require("./controllers/CategoryController");
 
 const router = express.Router();
 
@@ -11,5 +12,7 @@ router.delete("/product/:product_id", ProductController.deleteProductById);
 router.get("/product/:product_id/comments", CommentController.getByProductId);
 
 router.get("/user/:user_id/comments", CommentController.getByUserId);
+
+router.get("/categories", CategoryController.getAllCategory);
 
 module.exports = router;

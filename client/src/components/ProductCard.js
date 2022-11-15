@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import Button from "react-bootstrap/Button"
 import "./css/ProductCard.css";
@@ -5,7 +6,7 @@ import "./css/ProductCard.css";
 export default function ProductCard(props) {
   return (
     <div className="card" style={{width: '18rem'}}>
-      <img className="card-img-top" src={props.image} alt="Product" />
+      <img className="card-img-top" src={props.image} alt="no image available" />
       <div className="card-body">
         <h5 className="card-title" id="para0">{props.name}</h5>
         <p className="card-text" id="para">{props.description}</p>

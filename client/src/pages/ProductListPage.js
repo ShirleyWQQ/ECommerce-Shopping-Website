@@ -25,7 +25,9 @@ function getUrl(sortIndex, rating, categories) {
   if (rating > 0) {
     url = `${url}&rating=${rating}`;
   }
-  url = `${url}&category=${categories.join(",")}`;
+  if (categories.length > 0) {
+    url = `${url}&category=${categories.join(",")}`;
+  }
   console.log(url);
   return url;
 }
@@ -43,8 +45,8 @@ export default function ProductListPage() {
   const ratingOnSelect = (ratingIndex) => { setRatingIndex(ratingIndex); };
   const changeCategory = (categoryId) => {
     selectedCategory.includes(categoryId)
-    ? setSelectedCategory(selectedCategory.filter(item => item != categoryId))
-    : setSelectedCategory([categoryId, ... selectedCategory]);
+      ? setSelectedCategory(selectedCategory.filter(item => item !== categoryId))
+      : setSelectedCategory([categoryId, ...selectedCategory]);
   };
   /* Dependent Method */
   const getProduct = useCallback(() => {
@@ -77,7 +79,7 @@ export default function ProductListPage() {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} categories={categories} changeCategory={changeCategory}/>
+          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} categories={categories} changeCategory={changeCategory} />
           <ProductList data={products} />
         </div>
       </div>

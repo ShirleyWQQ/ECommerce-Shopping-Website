@@ -53,9 +53,9 @@ export default function ProductFilter(props) {
           {props.categories.map((item, index) => (
             <Form.Check
               type="checkbox"
-              id={item.category_id}
+              key={item.category_id}
               label={item.category_name}
-              onChange={()=> props.changeCategory(index)}
+              onChange={()=> props.changeCategory(item.category_id)}
             />
           ))}
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from "react-router-dom";
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -19,12 +20,6 @@ export default class Header extends React.Component {
           Click here to search for products.
         </Form.Text>
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Search
-      </Button>
-      <Button>
-          Shopping Cart 
-      </Button>
     </Form>
         
         );

@@ -45,7 +45,6 @@ export default class ProductListPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Product List Page</h1>
         <div style={{ display: "flex", flexDirection: "column" }}>
           {/* <ProductFilters value={this.state.selected} onChange={this.handleSelectChange} /> */}
           <div style={{ display: "flex", flexDirection: "row" }}>

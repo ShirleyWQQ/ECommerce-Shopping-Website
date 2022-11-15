@@ -1,11 +1,11 @@
-import ProductsPage from "../components/ProductsPage";
 import Navigation from "../components/examples/Navigation";
+import ProductListPage from "./ProductListPage";
 
 export default function Home() {
   return (
     <div>
       <Navigation />
-      <ProductsPage />
+      <ProductListPage />
     </div>
   )
 }

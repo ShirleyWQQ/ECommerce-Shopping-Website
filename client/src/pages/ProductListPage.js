@@ -1,35 +1,14 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Axios from "axios";
 import ProductList from "../components/ProductList";
 import ProductSort from "../components/ProductSort";
 import ProductFilterBar from "../components/ProductFilterBar";
 
 const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
-export default class ProductListPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: [{ product_id: 1, product_name: "Mock", price: "0.00" }],
-      sortIndex: 0, // Refer to sortOptions
-    }
-  }
-  render() {
-    return (
-      <div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <ProductSort sortOptions={sortOptions} onSelect={this.sortOnSelect} />
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <ProductFilterBar onChange={() => { }} />
-            <ProductList data={this.state.products} />
-          </div>
-        </div>
-      </div>
-    );
-  }
-  componentDidMount() {
-    this.getProduct();
-  }
-  getProduct = (sortIndex) => {
+export default function ProductListPage(props) {
+  const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock", price: "0.00" }]);
+  const [sortIndex, setSortIndex] = useState(0);
+  const getProduct = useCallback(() => {
     let url = "http://localhost:3001/api/products";
     switch (sortIndex) {
       case 1: // Price ASC
@@ -49,13 +28,27 @@ export default class ProductListPage extends React.Component {
     }
     Axios.get(url)
       .then(res => {
-        this.setState({ products: res.data });
+        setProducts(res.data);
       })
       .catch(err => {
         alert("Failed to retrieve products");
       });
-  }
-  sortOnSelect = (sortIndex) => {
-    this.getProduct(sortIndex);
-  }
+  }, [sortIndex]);
+  const sortOnSelect = (sortIndex) => {
+    setSortIndex(sortIndex);
+  };
+  useEffect(() => {
+    getProduct();
+  }, [getProduct]);
+  return (
+    <div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <ProductFilterBar onChange={() => { }} />
+          <ProductList data={products} />
+        </div>
+      </div>
+    </div>
+  );
 }

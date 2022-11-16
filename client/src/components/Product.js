@@ -1,6 +1,18 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import "./css/ProductCard.css";
+import StarIcon from "../images/StarIcon";
+function PrintStars(props) {
+    const num = parseInt(props.number);
+    if (num >= 4) {
+      return <div><StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>
+    } else if (num >= 3) {
+      return <div><StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>
+    } else if (num >= 2) {
+      return <div><StarIcon /><StarIcon /><StarIcon /></div>
+    }
+    return <StarIcon />
+}
 // props: name price description rating comment
 export default function Product(props) {
   return (
@@ -12,7 +24,7 @@ export default function Product(props) {
         <div className="col">
           <h5 className="name">{props.name}</h5>
           <h5 className="price">${props.price}</h5>
-          <h5 className="rating">{props.rating}</h5>
+          <h5 className="rating">{props.rating}<PrintStars number={props.rating} /></h5>
           <p className="description">{props.description}</p>
         </div>
       </div>

@@ -55,13 +55,12 @@ export default class Api {
     }
   }
   static async login(username, password) {
-    const loginUrl = "http://localhost:3001/api/user/login";
-    const body = {
-      username,
-      password
-    };
     try {
-      const res = await Axios.post(loginUrl, body);
+      const body = {
+        username,
+        password
+      };
+      const res = await Axios.post(`${baseUrl}/user/login`, body);
       return res.data;
     } catch (err) {
       throw err;

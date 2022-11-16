@@ -9,7 +9,8 @@ const supported = {
 };
 function getAllProduct(req, res) {
   const options = { filter: null };
-  // Sort option
+  // Sort option  - sortfield=rating&sortorder=asc
+  // ignore order of field is invalid; if no order/invalid order, default to asc
   const sortField = supported.sortFields.find(v => v === req.query.sortfield?.toLowerCase());
   let sortOrder = supported.sortOrder.find(v => v === req.query.sortorder?.toLowerCase());
   if (!sortOrder) sortOrder = "asc";
@@ -23,14 +24,29 @@ function getAllProduct(req, res) {
     if (!options.filter) options.filter = {};
     options.filter.rating = rating;
   }
-  // Category filter
+  // Category filter - category=100,200,300
+  // Ignore non number value, empty value
   let category = req.query.category;
   if (category) {
     category = category.split(",");
-    category = category.filter(v => !_.isNaN(_.toNumber(v)));
+    category = category.filter(v => !_.isNaN(_.toNumber(v)) && v.length > 0);
+    console.log(category);
     if (category.length > 0) {
       if (!options.filter) options.filter = {};
       options.filter.category = category;
+    }
+  }
+  // Price Filter - price=1-2 / price=-2 / price=1-
+  // Ignore invalid input (not a number, has negative)
+  let price = req.query.price;
+  if (price) {
+    price = price.split("-");
+    if (price.length === 2) {
+      let from = _.toNumber(price[0]), to = _.toNumber(price[1]);
+      if (!from) from = null;
+      if (!to) to = null;
+      if (!options.filter) options.filter = {};
+      options.filter.price = { from: from, to: to };
     }
   }
   // Call database

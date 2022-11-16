@@ -16,20 +16,41 @@ module.exports = class Product {
     // Filters
     if (options?.filter) {
       let where = WHERE;
+      // Rating
       if (!_.isNil(options.filter.rating)) {
         where += "product_rating >= ? ";
         insert.push(options.filter.rating);
       }
+      // Category
       if (!_.isNil(options.filter.category)) {
-        if (where.length !== WHERE.length) where += "AND ";
         let values = "";
         for (let v of options.filter.category) {
           values += `?,`;
           insert.push(v);
         }
         if (values.length > 0) {
+          if (where.length !== WHERE.length) where += "AND ";
           values = values.slice(0, values.length - 1);
           where += `category_id in (${values})`;
+        }
+      }
+      // Price
+      if (!_.isNil(options.filter.price)) {
+        const price = options.filter.price;
+        console.log(price);
+        let values = "";
+        if (price.from !== null) {
+          values += "price >= ? ";
+          insert.push(price.from);
+        }
+        if (price.to !== null) {
+          if (values.length !== 0) values += "AND ";
+          values += "price <= ? ";
+          insert.push(price.to);
+        }
+        if (price.from !== null || price.to !== null) {
+          if (where.length !== WHERE.length) where += "AND ";
+          where += values;
         }
       }
       if (where.length !== WHERE.length) query += where;

@@ -11,6 +11,7 @@ export default function ProductListPage() {
   const [sortIndex, setSortIndex] = useState(0);
   const [ratingIndex, setRatingIndex] = useState(-1);
   const [categories, setCategories] = useState([{ category_id: 1, category_name: "Mock Category" }]);
+  const [priceRange, setPriceRange] = useState({ from: null, to: null });
   const [selectedCategory, setSelectedCategory] = useState([]);
   /* Method */
   const sortOnSelect = (sortIndex) => { setSortIndex(sortIndex); };
@@ -20,12 +21,15 @@ export default function ProductListPage() {
       ? setSelectedCategory(selectedCategory.filter(item => item !== categoryId))
       : setSelectedCategory([categoryId, ...selectedCategory]);
   };
+  const changePriceRange = (from, to) => {
+    setPriceRange({ from, to });
+  };
   /* Dependent Method */
   const getProduct = useCallback(() => {
-    api.getProducts(sortIndex, ratingIndex, selectedCategory)
+    api.getProducts(sortIndex, ratingIndex, selectedCategory, priceRange)
       .then(setProducts)
       .catch(api.logError);
-  }, [sortIndex, ratingIndex, selectedCategory]);
+  }, [sortIndex, ratingIndex, selectedCategory, priceRange]);
   /* Hook */
   useEffect(() => {
     getProduct();
@@ -37,9 +41,18 @@ export default function ProductListPage() {
   return (
     <div>
       <div style={{ display: "flex", flexDirection: "column" }}>
-        <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <ProductFilter selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect} categories={categories} changeCategory={changeCategory} />
+          <div className="d-flex align-items-center">
+            <span>Displaying <b><i>{products.length}</i></b> item{products.length !== 1 ? "s" : ""}</span>
+          </div>
+          <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
+        </div>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <ProductFilter
+            selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect}
+            categories={categories} changeCategory={changeCategory}
+            setPriceRange={changePriceRange}
+          />
           <ProductList data={products} />
         </div>
       </div>

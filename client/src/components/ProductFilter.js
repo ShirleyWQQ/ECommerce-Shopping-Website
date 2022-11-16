@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import StarIcon from "../images/StarIcon";
@@ -15,13 +15,12 @@ export default function ProductFilter(props) {
   }
 
   const handleSubmitPriceRange = () => {
-    if(priceBegin === "" || priceEnd === "") {
+    if (priceBegin === "" || priceEnd === "") {
       setDisplayErrorForPrice(true);
     }
-    else if(Number(priceBegin) && Number(priceEnd) && Number(priceBegin) <= Number(priceEnd)) {
+    else if (Number(priceBegin) && Number(priceEnd) && Number(priceBegin) <= Number(priceEnd)) {
       setDisplayErrorForPrice(false);
-      // console.log(priceBegin);
-      // console.log(priceEnd);
+      props.setPriceRange(Number(priceBegin), Number(priceEnd));
     }
     else {
       setDisplayErrorForPrice(true);
@@ -32,13 +31,14 @@ export default function ProductFilter(props) {
     setDisplayErrorForPrice(false);
     setPriceBegin("");
     setPriceEnd("");
+    props.setPriceRange(null, null);
   }
 
   return (
     <div style={{ minWidth: 220 }}>
       <p className="font-weight-bold">Filter by Rating</p>
       <div style={{ display: "flex", flexDirection: "column", marginBottom: "30px" }}>
-        <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth:"130px"}} onClick={() => handleSelectStarRating(5)} active={(props.selectedIndex === 5) ? true : false}>
+        <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth: "130px" }} onClick={() => handleSelectStarRating(5)} active={(props.selectedIndex === 5) ? true : false}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <StarIcon />
             <StarIcon />
@@ -47,7 +47,7 @@ export default function ProductFilter(props) {
             <StarIcon />
           </div>
         </Button>
-        <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth:"130px" }} onClick={() => handleSelectStarRating(4)} active={(props.selectedIndex === 4) ? true : false}>
+        <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth: "130px" }} onClick={() => handleSelectStarRating(4)} active={(props.selectedIndex === 4) ? true : false}>
           <div style={{ display: "flex", alignItems: "center", float: "right" }}>
             <StarIcon />
             <StarIcon />
@@ -56,7 +56,7 @@ export default function ProductFilter(props) {
             {`&up`}
           </div>
         </Button>
-        <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth:"130px"}} onClick={() => handleSelectStarRating(3)} active={(props.selectedIndex === 3) ? true : false}>
+        <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth: "130px" }} onClick={() => handleSelectStarRating(3)} active={(props.selectedIndex === 3) ? true : false}>
           <div style={{ display: "flex", alignItems: "center", float: "right" }}>
             <StarIcon />
             <StarIcon />
@@ -64,7 +64,7 @@ export default function ProductFilter(props) {
             {`&up`}
           </div>
         </Button>
-        <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth:"130px"}} onClick={() => handleSelectStarRating(2)} active={(props.selectedIndex === 2) ? true : false}>
+        <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth: "130px" }} onClick={() => handleSelectStarRating(2)} active={(props.selectedIndex === 2) ? true : false}>
           <div style={{ display: "flex", alignItems: "center", float: "right" }}>
             <StarIcon />
             <StarIcon />
@@ -74,20 +74,20 @@ export default function ProductFilter(props) {
       </div>
       <p className="font-weight-bold">Filter by Category</p>
       <Form>
-        <div style={{marginBottom: "30px"}}>
+        <div style={{ marginBottom: "30px" }}>
           {props.categories.map((item, index) => (
             <Form.Check
               type="checkbox"
               key={item.category_id}
               label={item.category_name}
-              onChange={()=> props.changeCategory(item.category_id)}
+              onChange={() => props.changeCategory(item.category_id)}
             />
           ))}
         </div>
       </Form>
       <p className="font-weight-bold">Filter by Price Range</p>
       <Form>
-        <div style={{display: "flex", flexDirection:"row"}}>
+        <div style={{ display: "flex", flexDirection: "row" }}>
           <InputGroup size="sm" className="mb-3">
             <InputGroup.Text id="inputGroup-sizing-sm">$</InputGroup.Text>
             <Form.Control
@@ -97,7 +97,7 @@ export default function ProductFilter(props) {
               value={priceBegin}
             />
           </InputGroup>
-          <Form.Label style={{marginLeft: "5px", marginRight: "5px"}}>to</Form.Label>
+          <Form.Label style={{ marginLeft: "5px", marginRight: "5px" }}>to</Form.Label>
           <InputGroup size="sm" className="mb-3">
             <InputGroup.Text id="inputGroup-sizing-sm">$</InputGroup.Text>
             <Form.Control
@@ -108,13 +108,13 @@ export default function ProductFilter(props) {
             />
           </InputGroup>
         </div>
-        <Button onClick={handleSubmitPriceRange} style={{marginLeft: "7px", marginRight: "7px", maxHeight: "35px"}}variant="primary" size="sm">
-            Go
+        <Button onClick={handleSubmitPriceRange} style={{ marginLeft: "7px", marginRight: "7px", maxHeight: "35px" }} variant="primary" size="sm">
+          Go
         </Button>
-        <Button onClick={handleClearPriceRange} style={{marginLeft: "7px", marginRight: "7px", maxHeight: "35px"}} variant="primary" size="sm">
-            Clear
+        <Button onClick={handleClearPriceRange} style={{ marginLeft: "7px", marginRight: "7px", maxHeight: "35px" }} variant="primary" size="sm">
+          Clear
         </Button>
-        {displayErrorForPrice && <p class="text-danger">Invalid Price Range</p>} 
+        {displayErrorForPrice && <p class="text-danger">Invalid Price Range</p>}
       </Form>
 
     </div>

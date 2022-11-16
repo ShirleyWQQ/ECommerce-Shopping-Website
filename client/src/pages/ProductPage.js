@@ -11,9 +11,12 @@ export default function ProductPage() {
   const deleteComment = (cid) => {
     api.deleteComment(cid)
       .then(() => {
+        api.getProduct(product_id)
+          .then(setProduct)
+          .catch(api.logError);
         api.getComments(product_id)
-        .then(setComments)
-        .catch(api.logError);
+          .then(setComments)
+          .catch(api.logError);
       })
       .catch(api.logError);
   };

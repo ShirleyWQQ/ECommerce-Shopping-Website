@@ -10,13 +10,6 @@ export default function Product(props) {
         <p className="description">{props.description}</p>
         <h5 className="price">${props.price}</h5>
         <h5 className="rating">{props.rating}</h5>
-        <div className="comment">
-          {props.comments.map((item, index) => (
-            <div key={item.comment_id}>
-                {item.comment_id}{item.rating}{item.updated_time}{item.content}
-            </div>
-          ))}
-        </div>
     </div>
   );
 }

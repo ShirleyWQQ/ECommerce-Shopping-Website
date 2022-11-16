@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import StarIcon from "../images/StarIcon";
@@ -7,9 +7,33 @@ import InputGroup from 'react-bootstrap/InputGroup';
 // props: selectedIndex, setSelectedIndex
 // props: categories changeCategory
 export default function ProductFilter(props) {
+  const [priceBegin, setPriceBegin] = useState("");
+  const [priceEnd, setPriceEnd] = useState("");
+  const [displayErrorForPrice, setDisplayErrorForPrice] = useState(false);
   const handleSelectStarRating = (num) => {
     props.setSelectedIndex((num === props.selectedIndex) ? -1 : num);
   }
+
+  const handleSubmitPriceRange = () => {
+    if(priceBegin === "" || priceEnd === "") {
+      setDisplayErrorForPrice(true);
+    }
+    else if(Number(priceBegin) && Number(priceEnd) && Number(priceBegin) <= Number(priceEnd)) {
+      setDisplayErrorForPrice(false);
+      // console.log(priceBegin);
+      // console.log(priceEnd);
+    }
+    else {
+      setDisplayErrorForPrice(true);
+    }
+  }
+
+  const handleClearPriceRange = () => {
+    setDisplayErrorForPrice(false);
+    setPriceBegin("");
+    setPriceEnd("");
+  }
+
   return (
     <div style={{ minWidth: 220 }}>
       <p className="font-weight-bold">Filter by Rating</p>
@@ -68,7 +92,9 @@ export default function ProductFilter(props) {
             <InputGroup.Text id="inputGroup-sizing-sm">$</InputGroup.Text>
             <Form.Control
               aria-label="Small"
-              aria-describedby="inputGroup-sizing-sm"
+              aria-describedby="from-price"
+              onChange={e => setPriceBegin(e.target.value)}
+              value={priceBegin}
             />
           </InputGroup>
           <Form.Label style={{marginLeft: "5px", marginRight: "5px"}}>to</Form.Label>
@@ -76,13 +102,19 @@ export default function ProductFilter(props) {
             <InputGroup.Text id="inputGroup-sizing-sm">$</InputGroup.Text>
             <Form.Control
               aria-label="Small"
-              aria-describedby="inputGroup-sizing-sm"
+              aria-describedby="to-price"
+              onChange={e => setPriceEnd(e.target.value)}
+              value={priceEnd}
             />
           </InputGroup>
-          <Button style={{marginLeft: "7px", marginRight: "7px", maxHeight: "35px"}}variant="primary" size="sm">
-            Go
-          </Button>
         </div>
+        <Button onClick={handleSubmitPriceRange} style={{marginLeft: "7px", marginRight: "7px", maxHeight: "35px"}}variant="primary" size="sm">
+            Go
+        </Button>
+        <Button onClick={handleClearPriceRange} style={{marginLeft: "7px", marginRight: "7px", maxHeight: "35px"}} variant="primary" size="sm">
+            Clear
+        </Button>
+        {displayErrorForPrice && <p class="text-danger">Invalid Price Range</p>} 
       </Form>
 
     </div>

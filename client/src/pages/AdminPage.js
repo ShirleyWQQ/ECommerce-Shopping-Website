@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsAdmin } from "../stores/user";
 import Api from "../lib/api";
-import "./ProductsPage.css";
+// import "./ProductsPage.css";
 // React calls componentDidMount twice in dev mode
 export default function AdminPage() {
   const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock Product", price: "0.00" }]);

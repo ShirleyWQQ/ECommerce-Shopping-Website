@@ -10,7 +10,7 @@ export default function Product(props) {
         <p className="description">{props.description}</p>
         <h5 className="price">${props.price}</h5>
         <h5 className="rating">{props.rating}</h5>
-        <p className="comment">{props.comment}</p>
+        <div className="comment">{props.comment}</div>
     </div>
   );
 }

@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUser, selectIsAdmin } from "../stores/user";
+import { selectIsAdmin } from "../stores/user";
 import Api from "../lib/api";
 import "./ProductsPage.css";
 // React calls componentDidMount twice in dev mode
 export default function AdminPage() {
   const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock Product", price: "0.00" }]);
   const navigate = useNavigate();
-  const user = useSelector(selectUser);
   const isAdmin = useSelector(selectIsAdmin);
   const deleteProduct = (product_id) => {
     Api.deleteProduct(product_id)

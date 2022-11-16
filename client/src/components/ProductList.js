@@ -6,11 +6,10 @@ import "./css/ProductList.css";
 export default function ProductList(props) {
   return (
     <div>
-      <div>Displaying {props.data.length} item{props.data.length!==1?"s":""}</div>
-      <div className="flex-container">
+      <div className="flex-container" style={{ gap: "15px 20px" }}>
         {props.data.map((item, index) => (
           <ProductCard
-          key={index}
+            key={index}
             name={item.product_name}
             price={item.price}
             description={item.description}

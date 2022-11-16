@@ -13,6 +13,7 @@ export default function ProductCard(props) {
         <h5 className="card-title" id="para0" onClick={() => {navigate(`/product/${props.product_id}`)}}>{props.name}</h5>
         <p className="card-text" id="para">{props.description}</p>
         <h5 className="card-text2">${props.price}</h5>
+        <h5 className="position-absolute bottom-0 start-0">{props.rating}</h5>
         <div className="position-absolute bottom-0 end-0">
           <Button>+</Button>
         </div>

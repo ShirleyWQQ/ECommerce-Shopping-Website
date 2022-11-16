@@ -10,11 +10,12 @@ export default function ProductList(props) {
       <div className="flex-container">
         {props.data.map((item, index) => (
           <ProductCard
+          key={index}
             name={item.product_name}
             price={item.price}
             description={item.description}
             image={item.picture_source}
-            key={index}
+            product_id={item.product_id}
           />
         ))}
       </div>

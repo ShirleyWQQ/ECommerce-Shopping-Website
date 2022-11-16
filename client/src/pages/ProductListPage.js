@@ -1,36 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Axios from "axios";
 import ProductList from "../components/ProductList";
 import ProductSort from "../components/ProductSort";
 import ProductFilter from "../components/ProductFilter";
-
-const baseUrl = "http://localhost:3001/api/products?";
-function getUrl(sortIndex, rating, categories) {
-  let url = baseUrl;
-  switch (sortIndex) {
-    case 1: // Price ASC
-      url = `${url}&sortfield=price&sortorder=asc`;
-      break;
-    case 2: // Price DESC
-      url = `${url}&sortfield=price&sortorder=desc`;
-      break;
-    case 3: // Rating ASC
-      url = `${url}&sortfield=rating&sortorder=asc`;
-      break;
-    case 4: // Rating DESC
-      url = `${url}&sortfield=rating&sortorder=desc`;
-      break;
-    default:
-  }
-  if (rating > 0) {
-    url = `${url}&rating=${rating}`;
-  }
-  if (categories.length > 0) {
-    url = `${url}&category=${categories.join(",")}`;
-  }
-  console.log(url);
-  return url;
-}
+import api from "../lib/api";
 
 const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
 export default function ProductListPage() {
@@ -50,29 +22,17 @@ export default function ProductListPage() {
   };
   /* Dependent Method */
   const getProduct = useCallback(() => {
-    const url = getUrl(sortIndex, ratingIndex, selectedCategory);
-    Axios.get(url)
-      .then(res => {
-        setProducts(res.data);
-      })
-      .catch(err => {
-        alert("Failed to retrieve products");
-      });
+    api.getProducts(sortIndex, ratingIndex, selectedCategory)
+      .then(setProducts)
+      .catch(api.logError);
   }, [sortIndex, ratingIndex, selectedCategory]);
-  const getCategory = useCallback(() => {
-    Axios.get("http://localhost:3001/api/categories")
-      .then(res => {
-        setCategories(res.data);
-      })
-      .catch(err => {
-        alert("Failed to retrieve products");
-      });
-  }, []);
   /* Hook */
   useEffect(() => {
     getProduct();
-    getCategory();
-  }, [getProduct, getCategory]);
+    api.getCategories()
+      .then(setCategories)
+      .catch(api.logError)
+  }, [getProduct]);
   /* Render */
   return (
     <div>

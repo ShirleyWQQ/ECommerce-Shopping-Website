@@ -14,7 +14,7 @@ export default function Comment(props) {
       <div className="col">{props.updated_time}</div>
       <div className="col">{props.content}</div>
       <div className="col">
-        {user?.user_id === props.user_id ? <Button>delete</Button> : ""}
+        {user?.user_id === props.user_id ? <Button onClick={() => props.onDelete(props.comment_id)}>Delete</Button> : ""}
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ function getProductsFiltering(sortIndex, rating, categories, priceRange) {
   }
   if (priceRange) {
     const arr = [priceRange.from, priceRange.to];
-    url = `${url}&${arr.join("-")}`;
+    url = `${url}&price=${arr.join("-")}`;
   }
   console.log(url);
   return url;

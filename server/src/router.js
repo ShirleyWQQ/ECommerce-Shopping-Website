@@ -14,6 +14,7 @@ router.get("/product/:product_id/comments", CommentController.getByProductId);
 
 router.get("/user/:user_id/comments", CommentController.getByUserId);
 router.post("/user/login", UserController.login);
+router.post("/user/register", UserController.register);
 
 router.get("/categories", CategoryController.getAllCategory);
 

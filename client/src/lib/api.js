@@ -30,8 +30,7 @@ function getUrl(sortIndex, rating, categories) {
 export default class Api {
   static async getProduct(pid) {
     try {
-      const res = await Axios.get(`${baseUrl}/product/${pid}`)
-      debugger;
+      const res = await Axios.get(`${baseUrl}/product/${pid}`);
       return res.data[0];
     } catch (err) {
       throw err;
@@ -48,7 +47,7 @@ export default class Api {
   }
   static async getCategories() {
     try {
-      const res = await Axios.get(`${baseUrl}/categories`)
+      const res = await Axios.get(`${baseUrl}/categories`);
       return res.data
     } catch (err) {
       throw err;
@@ -61,6 +60,14 @@ export default class Api {
         password
       };
       const res = await Axios.post(`${baseUrl}/user/login`, body);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async getComments(pid) {
+    try {
+      const res = await Axios.get(`${baseUrl}/product/${pid}/comments`);
       return res.data;
     } catch (err) {
       throw err;

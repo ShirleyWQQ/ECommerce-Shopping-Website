@@ -12,6 +12,7 @@ const loginUrl = "http://localhost:3001/api/user/login";
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginFailed, setLoginFailed] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
@@ -26,10 +27,13 @@ function LoginPage() {
         navigate("/");
       })
       .catch(err => {
+        setLoginFailed(true);
         if (err.response) {
-          alert("Login Failed");
-        } else
-          alert("Failed to retrieve products");
+          console.log("Login Failed");
+        } else {
+          console.log("Failed to perform calls");
+          console.error(err);
+        }
       });
   };
   useEffect(() => {
@@ -41,10 +45,12 @@ function LoginPage() {
     <div>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email address" value={username} onChange={e => setUsername(e.target.value)} />
+          <Form.Label>Username</Form.Label>
+          <Form.Control type="text" placeholder="Enter email address" value={username} onChange={e => setUsername(e.target.value)} />
+          <Form.Text id="usernameHelpBlock" muted>
+            Username must be within 20 characters.
+          </Form.Text>
         </Form.Group>
-
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
@@ -52,12 +58,14 @@ function LoginPage() {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Remember Me for 30 Days" />
         </Form.Group>
-        <Button onClick={() => login()}>
-          Submit
-        </Button>
-        <Button onClick={() => navigate("/")}>
-          Back to Home Page
-        </Button>
+        {loginFailed ?
+          <Form.Text id="failed" className="text-danger">
+            Failed to Login
+          </Form.Text> : null}
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Button onClick={() => login()}>Submit</Button>
+          <Button onClick={() => navigate("/")}>Back to Home Page</Button>
+        </Form.Group>
       </Form>
     </div>
   );

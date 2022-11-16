@@ -33,6 +33,7 @@ export default function ProductPage() {
         <div className="col">rating</div>
         <div className="col">updated_time</div>
         <div className="col">content</div>
+        <div className="col">Edit</div>
       </div>
       {comments.map((item, index) => (
         <Comment
@@ -41,6 +42,7 @@ export default function ProductPage() {
           rating={item.rating}
           updated_time={item.updated_time}
           content={item.content}
+          user_id={item.user_id}
         />
       ))}
     </div>

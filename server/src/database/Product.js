@@ -83,7 +83,7 @@ module.exports = class Product {
     sql.execute(query, insert, (err, results) => {
       if (err) console.error(err);
       callback(err, results);
-    })
+    });
   }
 }
 

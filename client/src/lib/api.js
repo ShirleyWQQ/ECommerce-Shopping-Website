@@ -3,7 +3,7 @@ const base = "http://localhost:3001";
 const baseUrl = `${base}/api`;
 
 // Refer to ProductListPage
-function getProductsFiltering(sortIndex, rating, categories) {
+function getProductsFiltering(sortIndex, rating, categories, priceRange) {
   let url = `${baseUrl}/products?`;
   switch (sortIndex) {
     case 1: // Price ASC
@@ -26,6 +26,10 @@ function getProductsFiltering(sortIndex, rating, categories) {
   if (categories && categories.length > 0) {
     url = `${url}&category=${categories.join(",")}`;
   }
+  if (priceRange) {
+    const arr = [priceRange.from, priceRange.to];
+    url = `${url}&${arr.join("-")}`;
+  }
   console.log(url);
   return url;
 }
@@ -38,8 +42,8 @@ export default class Api {
       throw err;
     }
   }
-  static async getProducts(sortIndex, ratingIndex, selectedCategory) {
-    const url = getProductsFiltering(sortIndex, ratingIndex, selectedCategory);
+  static async getProducts(sortIndex, ratingIndex, selectedCategory, priceRange) {
+    const url = getProductsFiltering(sortIndex, ratingIndex, selectedCategory, priceRange);
     try {
       const res = await Axios.get(url)
       return res.data;
@@ -78,6 +82,14 @@ export default class Api {
   static async deleteProduct(pid) {
     try {
       const res = await Axios.delete(`${baseUrl}/product/${pid}`)
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async deleteComment(cid) {
+    try {
+      const res = await Axios.delete(`${baseUrl}/comment/${cid}`)
       return res.data;
     } catch (err) {
       throw err;

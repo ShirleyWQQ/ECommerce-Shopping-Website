@@ -11,17 +11,25 @@ module.exports = class Comment {
     const query = "SELECT * FROM Comment NATURAL JOIN (SELECT user_id, user_name FROM User) as T WHERE product_id = ?;";
     const insert = [product_id];
     sql.execute(query, insert, (err, results) => {
-      if (err) console.error(err); 
+      if (err) console.error(err);
       callback(err, results);
     })
   }
   static getByUserId(user_id, callback) {
-    const query = "SELECT * FROM Comment WHERE user_id = ?";
+    const query = "SELECT * FROM Comment WHERE user_id = ?;";
     const insert = [user_id];
     sql.execute(query, insert, (err, results) => {
-      if (err) console.error(err); 
+      if (err) console.error(err);
       callback(err, results);
     })
+  }
+  static deleteById(comment_id, callback) {
+    const query = "DELETE FROM Comment WHERE comment_id = ?;";
+    const insert = [comment_id];
+    sql.execute(query, insert, (err, results) => {
+      if (err) console.error(err);
+      callback(err, results);
+    });
   }
 }
 

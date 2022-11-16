@@ -20,7 +20,17 @@ function getByUserId(req, res) {
     return res.send(results);
   });
 };
+function deleteById(req, res) {
+  Comment.deleteById(req.params["comment_id"], (err, results) => {
+    if (err) {
+      res.status(500);
+      return res.send("Database Error");
+    }
+    res.status(200);
+    return res.send(results);
+  });
+}
 
 module.exports = {
-  getByProductId, getByUserId
+  getByProductId, getByUserId, deleteById
 };

@@ -13,6 +13,8 @@ router.delete("/product/:product_id", ProductController.deleteProductById);
 router.get("/product/:product_id/comments", CommentController.getByProductId);
 
 router.get("/user/:user_id/comments", CommentController.getByUserId);
+router.delete("/comment/:comment_id", CommentController.deleteById);
+
 router.post("/user/login", UserController.login);
 router.post("/user/register", UserController.register);
 

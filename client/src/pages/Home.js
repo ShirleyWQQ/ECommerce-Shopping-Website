@@ -7,7 +7,7 @@ export default function Home() {
   const user = useSelector(selectUser);
   const isAdmin = useSelector(selectIsAdmin);
   return (
-    <div>
+    <div style={{ paddingLeft: "20px"}}>
       {/* <Header></Header> */}
       <h1>Hello, {isAdmin?"Admin":"User"} {user?.user_name}!</h1>
       <ProductListPage />

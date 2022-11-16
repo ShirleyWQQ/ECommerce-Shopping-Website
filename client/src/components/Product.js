@@ -3,7 +3,7 @@ import React from "react";
 import "./css/ProductCard.css";
 import StarIcon from "../images/StarIcon";
 function PrintStars(props) {
-    const num = parseInt(props.number);
+    const num = parseFloat(props.number);
     if (num > 4) {
       return <div><StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>
     } else if (num > 3) {

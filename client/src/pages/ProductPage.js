@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Product from "../components/Product";
+import Comment from "../components/Comment";
 import api from "../lib/api";
 
 export default function ProductPage() {
@@ -27,12 +28,13 @@ export default function ProductPage() {
         : <h1>Product Not Found</h1>
       }
       {comments.map((item, index) => (
-        <div key={index}>
-          <p>username: {item.user_name}</p>
-          <p>rating: {item.rating}</p>
-          <p>updated_time: {item.updated_time}</p>
-          <p>content: {item.content}</p>
-        </div>
+        <Comment
+          key={index}
+          user_name={item.user_name}
+          rating={item.rating}
+          updated_time={item.updated_time}
+          content={item.content}
+        />
       ))}
     </div>
   )

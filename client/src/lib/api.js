@@ -34,7 +34,7 @@ export default class Api {
       debugger;
       return res.data[0];
     } catch (err) {
-      return err;
+      throw err;
     }
   }
   static async getProducts(sortIndex, ratingIndex, selectedCategory) {
@@ -43,7 +43,7 @@ export default class Api {
       const res = await Axios.get(url)
       return res.data;
     } catch (err) {
-      return err;
+      throw err;
     }
   }
   static async getCategories() {
@@ -51,7 +51,20 @@ export default class Api {
       const res = await Axios.get(`${baseUrl}/categories`)
       return res.data
     } catch (err) {
-      return err;
+      throw err;
+    }
+  }
+  static async login(username, password) {
+    const loginUrl = "http://localhost:3001/api/user/login";
+    const body = {
+      username,
+      password
+    };
+    try {
+      const res = await Axios.post(loginUrl, body);
+      return res.data;
+    } catch (err) {
+      throw err;
     }
   }
   static logError(err) {

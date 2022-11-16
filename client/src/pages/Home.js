@@ -1,4 +1,3 @@
-import Navigation from "../components/examples/Navigation";
 import ProductListPage from "./ProductListPage";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
@@ -9,7 +8,6 @@ export default function Home() {
   const isAdmin = useSelector(selectIsAdmin);
   return (
     <div>
-      <Navigation />
       {/* <Header></Header> */}
       <h1>Hello, {isAdmin?"Admin":"User"} {user?.user_name}!</h1>
       <ProductListPage />

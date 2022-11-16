@@ -8,7 +8,7 @@ module.exports = class Comment {
    * @param {databaseCallback} callback 
    */
   static getByProductId(product_id, callback) {
-    const query = "SELECT * FROM Comment WHERE product_id = ?";
+    const query = "SELECT * FROM Comment NATURAL JOIN (SELECT user_id, user_name FROM User) as T WHERE product_id = ?;";
     const insert = [product_id];
     sql.execute(query, insert, (err, results) => {
       if (err) console.error(err); 

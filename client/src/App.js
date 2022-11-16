@@ -6,10 +6,12 @@ import ProductListPage from "./pages/ProductListPage";
 import LoginPage from "./pages/user/LoginPage";
 import RegisterPage from "./pages/user/RegisterPage";
 import ProductPage from "./pages/ProductPage";
+import Navigation from "./components/examples/Navigation";
 
 function App() {
   return (
     <BrowserRouter>
+      <Navigation />
       <Routes>
         <Route path="/" element={<Home />} ></Route>
         <Route path="/products" element={<ProductListPage />} ></Route>

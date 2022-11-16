@@ -16,6 +16,7 @@ export default function ProductList(props) {
             description={item.description}
             image={item.picture_source}
             product_id={item.product_id}
+            rating={item.product_rating}
           />
         ))}
       </div>

@@ -4,11 +4,11 @@ import "./css/ProductCard.css";
 import StarIcon from "../images/StarIcon";
 function PrintStars(props) {
     const num = parseInt(props.number);
-    if (num >= 4) {
+    if (num > 4) {
       return <div><StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>
-    } else if (num >= 3) {
+    } else if (num > 3) {
       return <div><StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>
-    } else if (num >= 2) {
+    } else if (num > 2) {
       return <div><StarIcon /><StarIcon /><StarIcon /></div>
     }
     return <StarIcon />

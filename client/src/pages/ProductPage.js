@@ -24,6 +24,7 @@ export default function ProductPage() {
           price={product.price}
           description={product.description}
           image={product.picture_source}
+          rating={product.product_rating}
           comments />
         : <h1>Product Not Found</h1>
       }

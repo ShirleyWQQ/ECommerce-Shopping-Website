@@ -4,7 +4,7 @@ function login(req, res) {
   const { username, password } = req.body;
   if (!username || !password) {
     res.status(400);
-    res.send("Failed to login");
+    return res.send("Failed to login");
   }
   User.getUserByName(username, (err, results) => {
     if (err) {

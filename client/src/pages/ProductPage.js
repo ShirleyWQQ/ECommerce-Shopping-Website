@@ -7,8 +7,10 @@ export default function ProductPage() {
   const { product_id } = useParams();
   const [product, setProduct] = useState({ found: false });
   useEffect(() => {
-    api.getProduct(product_id, setProduct);
-  }, [product_id, setProduct]);
+    api.getProduct(product_id)
+      .then(setProduct)
+      .catch(api.logError);
+  }, [product_id]);
   return (
     <div>
       {product

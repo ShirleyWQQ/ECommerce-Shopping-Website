@@ -1,13 +1,11 @@
 import Button from "react-bootstrap/esm/Button";
 import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import Axios from "axios";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login as StoreLogin } from "../../stores/user";
 import { selectUser } from "../../stores/user";
-
-const loginUrl = "http://localhost:3001/api/user/login";
+import Api from "../../lib/api";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -17,13 +15,9 @@ function LoginPage() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const login = () => {
-    const body = {
-      username,
-      password
-    }
-    Axios.post(loginUrl, body)
+    Api.login(username, password)
       .then(res => {
-        dispatch(StoreLogin(res.data));
+        dispatch(StoreLogin(res));
         navigate("/");
       })
       .catch(err => {

@@ -17,3 +17,30 @@ SELECT * FROM Product ORDER BY product_rating ASC;
 SELECT * FROM Product ORDER BY product_rating DESC;
 SELECT * FROM Product ORDER BY price ASC;
 SELECT * FROM Product ORDER BY price DESC;
+
+-- Sort all products in the selected category/categories by price:
+select * from product where
+product_id in (select product_id from CategoryProduct where category_id = 100) order by price asc;
+select * from product where
+product_id in (select product_id from CategoryProduct where category_id = 300 or category_id = 500) order by price desc;
+
+-- Sort all products in the selected category/categories by rating
+select * from product where
+product_id in (select product_id from CategoryProduct where category_id = 100) order by product_rating asc;
+select * from product where
+product_id in (select product_id from CategoryProduct where category_id = 300 or category_id = 500) order by product_rating desc;
+
+-- Sort all products in the selected price range(s) by rating
+select * from product where
+product_id in (select product_id from CategoryProduct where (price >= 0 and price <= 20)) order by product_rating asc;
+select * from product where
+product_id in (select product_id from CategoryProduct where (price >= 0 and price <= 15)) order by product_rating desc;
+
+-- Return all products in the selected category/categories in the selected price range(s)
+select * from product where
+product_id in (select product_id from CategoryProduct where (price >= 0 and price <= 20 and category_id = 500)) 
+order by product_rating asc;
+
+select * from product where
+product_id in (select product_id from CategoryProduct where (price >= 0 and price <= 100
+and (category_id = 300 or category_id = 500))) order by product_rating asc;

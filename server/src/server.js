@@ -17,7 +17,6 @@ app.get("/", (req, res) => {
   res.send("Server is running.")
 });
 app.post("/", (req, res) => {
-  console.log(req.body);
   res.status(201);
   res.send(req.body.hello);
 });

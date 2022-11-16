@@ -30,7 +30,6 @@ function getAllProduct(req, res) {
   if (category) {
     category = category.split(",");
     category = category.filter(v => !_.isNaN(_.toNumber(v)) && v.length > 0);
-    console.log(category);
     if (category.length > 0) {
       if (!options.filter) options.filter = {};
       options.filter.category = category;

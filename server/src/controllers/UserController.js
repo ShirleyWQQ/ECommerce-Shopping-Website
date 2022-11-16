@@ -17,7 +17,6 @@ function login(req, res) {
       delete user.password;
       return res.send(user);
     }
-    console.log(results[0]);
     res.status(400);
     return res.send("Failed to login");
   });
@@ -33,7 +32,6 @@ function register(req, res) {
     res.status(400);
     return res.send("Username too long");
   }
-  console.log(req.body);
   User.insertUser(username, password, profile, isAdmin, (err, results) => {
     if (err) {
       res.status(500);

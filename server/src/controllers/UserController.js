@@ -24,8 +24,8 @@ function login(req, res) {
 };
 
 function register(req, res) {
-  const { username, password, profile } = req.body;
-  if (!_.isString(username) || !_.isString(password) || !_.isString(profile)) {
+  const { username, password, profile, isAdmin } = req.body;
+  if (!_.isString(username) || !_.isString(password) || !_.isString(profile) || !_.isBoolean(isAdmin)) {
     res.status(400);
     return res.send("Bad Input");
   }
@@ -34,7 +34,7 @@ function register(req, res) {
     return res.send("Username too long");
   }
   console.log(req.body);
-  User.insertUser(username, password, profile, (err, results) => {
+  User.insertUser(username, password, profile, isAdmin, (err, results) => {
     if (err) {
       res.status(500);
       return res.send("Database Error");

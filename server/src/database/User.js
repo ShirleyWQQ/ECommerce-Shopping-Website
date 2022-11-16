@@ -13,20 +13,28 @@ module.exports = class User {
     sql.execute(query, insert, (err, results) => {
       if (err) console.error(err);
       callback(err, results);
-    })
+    });
   }
   static getById(userid, callback) {
-    const query = "SELECT * FROM User  LEFT JOIN Admin ON user_id=admin_id WHERE user_id=?;";
+    const query = "SELECT * FROM User LEFT JOIN Admin ON user_id=admin_id WHERE user_id=?;";
     const insert = [userid];
     sql.execute(query, insert, (err, results) => {
       if (err) console.error(err);
       callback(err, results);
-    })
+    });
   }
-  static insertUser(username, password, profile, callback) {
+  static makeAdmin(userid, callback) {
+    const query = "INSERT INTO Admin VALUES(?);";
+    const insert = [userid];
+    sql.execute(query, insert, (err, results) => {
+      if (err) console.error(err);
+      callback(err, results);
+    });
+
+  }
+  static insertUser(username, password, profile, isAdmin, callback) {
     const maxIdQuery = "SELECT MAX(user_id) AS user_id FROM User;";
     const insertQuery = "INSERT INTO User VALUES(?, ?, ?, ?);";
-    const selectUser = "INSERT INTO User VALUES(?, ?, ?, ?);";
     sql.execute(maxIdQuery, (err, results) => {
       if (err) {
         console.error(err);
@@ -38,6 +46,15 @@ module.exports = class User {
         if (err) {
           console.error(err);
           return callback(err, results);
+        }
+        if (isAdmin) {
+          return User.makeAdmin(newId, (err, cb) => {
+            if (err) {
+              console.error(err);
+              return callback(err, results);
+            }
+            User.getById(newId, callback);
+          });
         }
         User.getById(newId, callback);
       });

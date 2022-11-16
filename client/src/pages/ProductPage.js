@@ -5,10 +5,14 @@ import api from "../lib/api";
 
 export default function ProductPage() {
   const { product_id } = useParams();
-  const [product, setProduct] = useState({ found: false });
+  const [product, setProduct] = useState(null);
+  const [comments, setComments] = useState([]);
   useEffect(() => {
     api.getProduct(product_id)
       .then(setProduct)
+      .catch(api.logError);
+    api.getComments(product_id)
+      .then(setComments)
       .catch(api.logError);
   }, [product_id]);
   return (
@@ -22,6 +26,14 @@ export default function ProductPage() {
           comments />
         : <h1>Product Not Found</h1>
       }
+      {comments.map((item, index) => (
+        <div key={index}>
+          <p>username: {item.user_name}</p>
+          <p>rating: {item.rating}</p>
+          <p>updated_time: {item.updated_time}</p>
+          <p>content: {item.content}</p>
+        </div>
+      ))}
     </div>
   )
 }

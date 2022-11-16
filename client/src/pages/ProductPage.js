@@ -27,6 +27,12 @@ export default function ProductPage() {
           comments />
         : <h1>Product Not Found</h1>
       }
+      <div className = "row">
+        <div className="col">user_name</div>
+        <div className="col">rating</div>
+        <div className="col">updated_time</div>
+        <div className="col">content</div>
+      </div>
       {comments.map((item, index) => (
         <Comment
           key={index}

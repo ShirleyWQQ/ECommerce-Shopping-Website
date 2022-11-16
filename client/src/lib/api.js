@@ -1,7 +1,9 @@
 import Axios from "axios";
 const base = "http://localhost:3001";
 const baseUrl = `${base}/api`;
-function getUrl(sortIndex, rating, categories) {
+
+// Refer to ProductListPage
+function getProductsFiltering(sortIndex, rating, categories) {
   let url = `${baseUrl}/products?`;
   switch (sortIndex) {
     case 1: // Price ASC
@@ -21,7 +23,7 @@ function getUrl(sortIndex, rating, categories) {
   if (rating > 0) {
     url = `${url}&rating=${rating}`;
   }
-  if (categories.length > 0) {
+  if (categories && categories.length > 0) {
     url = `${url}&category=${categories.join(",")}`;
   }
   console.log(url);
@@ -37,7 +39,7 @@ export default class Api {
     }
   }
   static async getProducts(sortIndex, ratingIndex, selectedCategory) {
-    const url = getUrl(sortIndex, ratingIndex, selectedCategory);
+    const url = getProductsFiltering(sortIndex, ratingIndex, selectedCategory);
     try {
       const res = await Axios.get(url)
       return res.data;
@@ -68,6 +70,14 @@ export default class Api {
   static async getComments(pid) {
     try {
       const res = await Axios.get(`${baseUrl}/product/${pid}/comments`);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async deleteProduct(pid) {
+    try {
+      const res = await Axios.delete(`${baseUrl}/product/${pid}`)
       return res.data;
     } catch (err) {
       throw err;

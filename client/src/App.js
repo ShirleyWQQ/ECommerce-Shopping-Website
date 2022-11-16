@@ -7,6 +7,7 @@ import LoginPage from "./pages/user/LoginPage";
 import RegisterPage from "./pages/user/RegisterPage";
 import ProductPage from "./pages/ProductPage";
 import Navigation from "./components/examples/Navigation";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} ></Route>
         <Route path="/cart" element={<Home />} ></Route>
         <Route path="/user" element={<Home />} ></Route>
+        <Route path="/admin" element={<AdminPage />} ></Route>
         <Route path="/example" element={<ExamplePage />}></Route>
         <Route path="*" element={<NoPage />} />
         <Route path="/404" element={<NoPage />} />

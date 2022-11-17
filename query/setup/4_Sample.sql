@@ -37,3 +37,5 @@ UPDATE Product SET product_rating = 0 WHERE product_id > 0;
 LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/CategoryProduct.txt" INTO TABLE CategoryProduct;
 -- Load Comment
 LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/Comment.txt" INTO TABLE Comment;
+-- Load Shopping Cart
+LOAD DATA /*LOCAL*/ INFILE "REPLACE_YOUR_PATH/ShoppingCart.txt" INTO TABLE ShoppingCart;

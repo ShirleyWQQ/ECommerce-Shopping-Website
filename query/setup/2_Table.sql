@@ -44,3 +44,14 @@ CREATE TABLE Comment (
     AND rating <= 5
   )
 );
+CREATE TABLE ShoppingCart (
+  user_id INT NOT NULL,
+  product_id INT NOT NULL,
+  quantity INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE,
+  PRIMARY KEY (user_id, product_id),
+  CHECK (
+    quantity >= 0
+  )
+);

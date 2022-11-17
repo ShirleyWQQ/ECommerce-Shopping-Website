@@ -1,17 +1,16 @@
-import ServerCheck from "../components/ServerCheck";
-import ProductsPage from "../components/ProductsPage";
-import Counter from "../components/Counter";
-import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import ProductListPage from "./ProductListPage";
+// import Header from "../components/Header";
+import { useSelector } from "react-redux";
+import { selectUser, selectIsAdmin } from "../stores/user";
 
 export default function Home() {
-  const navigate = useNavigate();
+  const user = useSelector(selectUser);
+  const isAdmin = useSelector(selectIsAdmin);
   return (
-    <div>
-      <Button onClick={() => navigate("/404")}>Go to 404</Button>
-      <Counter></Counter>
-      <ServerCheck></ServerCheck>
-      <ProductsPage></ProductsPage>
+    <div style={{ paddingLeft: "20px" }}>
+      {/* <Header></Header> */}
+      <h1>Hello, {isAdmin ? "Admin" : (user ? "User" : "Guest")} {user?.user_name}!</h1>
+      <ProductListPage />
     </div>
   )
-}
+};

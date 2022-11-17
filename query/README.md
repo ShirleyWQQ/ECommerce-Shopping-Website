@@ -5,9 +5,10 @@ This folder contains the sql queries that we use to setup data and some sample q
 ```
 .
 ├── drafts              # Some draft queries member created
+├── Production          # Contains generated production data in txt file
 ├── sample              # Contains the sample data in txt file
-├── setup               # Contains quries to prepare database, tables, triggers, and load some sample data
-├── tests               # Contains test quries for features and their output
+├── setup               # Contains queries to prepare database, tables, triggers, and load some sample data
+├── tests               # Contains test queries for features and their output
 └── README.md
 ```
 

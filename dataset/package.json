@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "generate": "node ./data_generate.js > out.local"
-  },
-  "dependencies": {
-    "chance": "^1.1.9"
-  }
-}

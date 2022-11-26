@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import StarIcon from "../images/StarIcon";
 import InputGroup from 'react-bootstrap/InputGroup';
+import "./css/ProductFilter.css";
 
 // props: selectedIndex, setSelectedIndex
 // props: categories changeCategory
@@ -36,7 +37,7 @@ export default function ProductFilter(props) {
 
   return (
     <div style={{ minWidth: 220 }}>
-      <p className="font-weight-bold">Filter by Rating</p>
+      <p className="font-weight-bold" id="filter">Filter by Rating</p>
       <div style={{ display: "flex", flexDirection: "column", marginBottom: "30px" }}>
         <Button variant="light" style={{ marginRight: "40px", marginBottom: "7px", maxWidth: "130px" }} onClick={() => handleSelectStarRating(5)} active={(props.selectedIndex === 5) ? true : false}>
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -72,7 +73,7 @@ export default function ProductFilter(props) {
           </div>
         </Button>
       </div>
-      <p className="font-weight-bold">Filter by Category</p>
+      <p className="font-weight-bold" id="filter">Filter by Category</p>
       <Form>
         <div style={{ marginBottom: "30px" }}>
           {props.categories.map((item, index) => (
@@ -85,7 +86,7 @@ export default function ProductFilter(props) {
           ))}
         </div>
       </Form>
-      <p className="font-weight-bold">Filter by Price Range</p>
+      <p className="font-weight-bold" id="filter">Filter by Price Range</p>
       <Form>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <InputGroup size="sm" className="mb-3">

@@ -2,13 +2,21 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../stores/user";
 
-function CartPage(props) {
+function CartPage() {
   const user = useSelector(selectUser);
-  return (
-    <div>
-      <h1> {user ? "cart placeholder" : "Nothing"}</h1>
-    </div>
-  )
+  if (user) {
+    return (
+      <div>
+        <h1>cart placeholder</h1>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <h1>nothing</h1>
+      </div>
+    )
+  }
 }
 
 export default CartPage;

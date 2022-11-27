@@ -25,3 +25,7 @@ table {
   .flex-container > div {
     text-align: center;
   }
+
+  #comment {
+    font-weight: bold;
+  }

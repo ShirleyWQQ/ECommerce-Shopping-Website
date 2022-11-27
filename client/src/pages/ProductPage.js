@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Product from "../components/Product";
 import Comment from "../components/Comment";
 import api from "../lib/api";
+import "./ProductsPage.css"
 
 export default function ProductPage() {
   const { product_id } = useParams();
@@ -41,11 +42,11 @@ export default function ProductPage() {
         : <h1>Product Not Found</h1>
       }
       <div className="row">
-        <div className="col">user_name</div>
-        <div className="col">rating</div>
-        <div className="col">updated_time</div>
-        <div className="col">content</div>
-        <div className="col">Edit</div>
+        <div className="col" id="comment">user_name</div>
+        <div className="col" id="comment">rating</div>
+        <div className="col" id="comment">updated_time</div>
+        <div className="col" id="comment">content</div>
+        <div className="col" id="comment">Edit</div>
       </div>
       {comments.map((item, index) => (
         <Comment

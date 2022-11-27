@@ -94,6 +94,7 @@ export default function ProductFilter(props) {
             <Form.Control
               aria-label="Small"
               aria-describedby="from-price"
+              placeholder="Min"
               onChange={e => setPriceBegin(e.target.value)}
               value={priceBegin}
             />
@@ -104,6 +105,7 @@ export default function ProductFilter(props) {
             <Form.Control
               aria-label="Small"
               aria-describedby="to-price"
+              placeholder="Max"
               onChange={e => setPriceEnd(e.target.value)}
               value={priceEnd}
             />

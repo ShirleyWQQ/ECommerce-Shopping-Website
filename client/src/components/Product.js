@@ -23,7 +23,7 @@ export default function Product(props) {
         </div>
         <div className="col">
           <h5 className="name" id="name">{props.name}</h5>
-          <h5 className="price" id="price">Price: ${props.price}</h5>
+          <h5 className="price" id="price1">Price: ${props.price}</h5>
           <h5 className="rating">
             <PrintStars number={props.rating} />
           </h5>

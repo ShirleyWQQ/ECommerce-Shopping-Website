@@ -60,6 +60,9 @@ function LoginPage() {
           <Button onClick={() => login()}>Submit</Button>
           <Button onClick={() => navigate("/")}>Back to Home Page</Button>
         </Form.Group>
+        <Form.Group className="mb-3" controlId="newUserRegistration">
+          <Button variant="link" onClick={() => navigate("/register")}>New User? Create Account</Button>
+        </Form.Group>
       </Form>
     </div>
   );

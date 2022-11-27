@@ -41,19 +41,19 @@ function RegisterPage() {
     <div>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email address" value={username} onChange={e => setUsername(e.target.value)} />
+          <Form.Label>Set Username</Form.Label>
+          <Form.Control type="email" placeholder="Enter Username" value={username} onChange={e => setUsername(e.target.value)} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <Form.Label>Set Password</Form.Label>
+          <Form.Control type="password" placeholder="New Password" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Remember Me for 30 Days" />
+          <Form.Check type="checkbox" label="This account will be an admin account" />
         </Form.Group>
         <Button onClick={() => login()}>
-          Submit
+          Register
         </Button>
         <Button onClick={() => navigate("/")}>
           Back to Home Page

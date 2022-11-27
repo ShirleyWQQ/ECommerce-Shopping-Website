@@ -6,24 +6,26 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login as StoreLogin } from "../../stores/user";
 import { selectUser } from "../../stores/user";
+import Api from "../../lib/api";
 
-const loginUrl = "http://localhost:3001/api/user/login";
+const registerUrl = "http://localhost:3001/api/user/register";
 
 function RegisterPage() {
-  const [username, setUsername] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [profile, setProfile] = useState("profile")
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const login = () => {
-    const body = {
-      username,
-      password
-    }
-    Axios.post(loginUrl, body)
+
+  const handleCheckboxChange = () => {
+    setIsAdmin(!isAdmin);
+  }
+  const register = () => {
+    Api.register(userName, password, profile, isAdmin)
       .then(res => {
-        dispatch(StoreLogin(res.data));
-        navigate("/");
+        const user = res.data;
+        console.log(user);
       })
       .catch(err => {
         if (err.response) {
@@ -42,7 +44,7 @@ function RegisterPage() {
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Set Username</Form.Label>
-          <Form.Control type="email" placeholder="Enter Username" value={username} onChange={e => setUsername(e.target.value)} />
+          <Form.Control type="email" placeholder="Enter Username" value={userName} onChange={e => setUserName(e.target.value)} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -50,9 +52,9 @@ function RegisterPage() {
           <Form.Control type="password" placeholder="New Password" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="This account will be an admin account" />
+          <Form.Check type="checkbox" label="This account will be an admin account" onChange={handleCheckboxChange} />
         </Form.Group>
-        <Button onClick={() => login()}>
+        <Button onClick={() => register()}>
           Register
         </Button>
         <Button onClick={() => navigate("/")}>

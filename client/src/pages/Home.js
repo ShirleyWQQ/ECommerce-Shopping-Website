@@ -1,5 +1,5 @@
 import ProductListPage from "./ProductListPage";
-// import Header from "../components/Header";
+import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { selectUser, selectIsAdmin } from "../stores/user";
 
@@ -8,7 +8,7 @@ export default function Home() {
   const isAdmin = useSelector(selectIsAdmin);
   return (
     <div style={{ paddingLeft: "20px" }}>
-      {/* <Header></Header> */}
+      <Header></Header>
       <h1>Hello, {isAdmin ? "Admin" : (user ? "User" : "Guest")} {user?.user_name}!</h1>
       <ProductListPage />
     </div>

@@ -19,7 +19,7 @@ export default function Product(props) {
     <div className="container">
       <div className="row">
         <div className="col">
-          <img className="img-top" src={props.image} alt="no image available" />
+          <img className="img-top" src={props.image} id="img1" alt="no image available" />
         </div>
         <div className="col">
           <h5 className="name" id="name">{props.name}</h5>

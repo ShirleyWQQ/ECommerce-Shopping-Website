@@ -29,12 +29,12 @@
     max-width: 400px;
 }
   
-.container img {
+#img1 {
     width: 270px;
     height: 300px;
 }
   
-.container .btn {
+#button {
     position: absolute;
     top: 91%;
     left: 88%;
@@ -48,8 +48,4 @@
     cursor: pointer;
     border-radius: 55%;
     text-align: center;
-}
-  
-.container .btn:hover {
-    background-color: red;
 }

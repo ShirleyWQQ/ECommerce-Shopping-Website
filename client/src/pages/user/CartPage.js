@@ -1,8 +1,12 @@
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../stores/user";
 
-function CartPage() {
+function CartPage(props) {
+  const user = useSelector(selectUser);
   return (
     <div>
-      Shopping cart Page place holder
+      <h1> {user ? "cart placeholder" : "Nothing"}</h1>
     </div>
   )
 }

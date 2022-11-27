@@ -71,6 +71,20 @@ export default class Api {
       throw err;
     }
   }
+  static async register(username, password, profile, isAdmin) {
+    try {
+      const body = {
+        username,
+        password,
+        profile,
+        isAdmin
+      };
+      const res = await Axios.post(`${baseUrl}/user/register`, body);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
   static async getComments(pid) {
     try {
       const res = await Axios.get(`${baseUrl}/product/${pid}/comments`);

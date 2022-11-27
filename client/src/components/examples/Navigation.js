@@ -17,6 +17,7 @@ export default function Navigation() {
         ? <Button onClick={() => dispatch(logout())}>Logout</Button>
         : <Button onClick={() => navigate("/login")}>Login</Button>
       }
+      <Button onClick={() => navigate("/cart")}>Cart</Button>
     </div>
   )
 }

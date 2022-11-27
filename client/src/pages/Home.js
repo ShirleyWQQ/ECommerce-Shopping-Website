@@ -8,9 +8,13 @@ export default function Home() {
   const isAdmin = useSelector(selectIsAdmin);
   return (
     <div style={{ paddingLeft: "20px" }}>
-      <Header></Header>
-      <h1>Hello, {isAdmin ? "Admin" : (user ? "User" : "Guest")} {user?.user_name}!</h1>
-      <ProductListPage />
+      <div className="container">
+        <div className="row">
+          <div className="col"><Header></Header></div>
+          <div className="col"><h1>Hello, {isAdmin ? "Admin" : (user ? "User" : "Guest")} {user?.user_name}!</h1></div>
+        </div>
+      </div>
+      <div><ProductListPage /></div>
     </div>
   )
 };

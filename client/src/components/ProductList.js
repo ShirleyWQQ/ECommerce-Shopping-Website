@@ -12,7 +12,7 @@ export default function ProductList(props) {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     return props.data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, props.data.length]);
+  }, [JSON.stringify(props.data)]);
 
   return (
     <div>

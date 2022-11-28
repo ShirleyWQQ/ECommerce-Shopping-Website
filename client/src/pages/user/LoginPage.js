@@ -36,18 +36,18 @@ function LoginPage() {
     }
   }, [user, navigate]);
   return (
-    <div>
+    <div style={{marginLeft:"40%", marginTop:"15%"}}>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="Enter email address" value={username} onChange={e => setUsername(e.target.value)} />
+          <Form.Label style={{fontWeight: "500"}}>Username</Form.Label>
+          <Form.Control style={{maxWidth: "250px"}} type="text" placeholder="Enter email address" value={username} onChange={e => setUsername(e.target.value)} />
           <Form.Text id="usernameHelpBlock" muted>
             Username must be within 20 characters.
           </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <Form.Label style={{fontWeight: "500"}}>Password</Form.Label>
+          <Form.Control style={{maxWidth: "250px"}} type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Remember Me for 30 Days" />

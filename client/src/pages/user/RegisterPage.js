@@ -57,7 +57,7 @@ function RegisterPage() {
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="This account will be an admin account" onChange={handleCheckboxChange} />
         </Form.Group>
-        <Button onClick={() => register()}>
+        <Button style={{marginRight: "5px"}} onClick={() => register()}>
           Register
         </Button>
         <Button onClick={() => navigate("/")}>

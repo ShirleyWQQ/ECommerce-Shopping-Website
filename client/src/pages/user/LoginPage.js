@@ -54,11 +54,11 @@ function LoginPage() {
         </Form.Group>
         {loginFailed ?
           <Form.Text id="failed" className="text-danger">
-            Failed to Login
+            Failed to Login, wrong user name or password
           </Form.Text> : null}
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Button onClick={() => login()}>Submit</Button>
-          <Button onClick={() => navigate("/")}>Back to Home Page</Button>
+        <Form.Group style={{margin: "0" }}className="mb-3" controlId="formBasicCheckbox">
+          <Button style={{marginRight: "5px"}} onClick={() => login()}>Log In</Button>
+          <Button onClick={() => navigate("/")} >Back to Homepage</Button>
         </Form.Group>
         <Form.Group className="mb-3" controlId="newUserRegistration">
           <Button variant="link" onClick={() => navigate("/register")}>New User? Create Account</Button>

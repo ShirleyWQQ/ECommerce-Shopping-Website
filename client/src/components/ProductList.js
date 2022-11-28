@@ -1,13 +1,23 @@
-import React from "react";
-import ProductCard from "./ProductCard";
-import "./css/ProductList.css";
+import React, { useState, useMemo } from 'react';
+import Pagination from './Pagination';
+import ProductCard from "./ProductCard";;
+
+let PageSize = 10;
 
 // props: data(product[])
 export default function ProductList(props) {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return props.data.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
   return (
     <div>
       <div className="flex-container" style={{ gap: "15px 20px" }}>
-        {props.data.map((item, index) => (
+        {currentTableData.map((item, index) => (
           <ProductCard
             key={index}
             name={item.product_name}
@@ -19,6 +29,13 @@ export default function ProductList(props) {
           />
         ))}
       </div>
+        <Pagination
+          className="pagination-bar"
+          currentPage={currentPage}
+          totalCount={props.data.length}
+          pageSize={PageSize}
+          onPageChange={page => setCurrentPage(page)}
+        />
     </div>
   );
 }

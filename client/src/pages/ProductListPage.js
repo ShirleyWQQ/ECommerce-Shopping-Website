@@ -5,7 +5,7 @@ import ProductFilter from "../components/ProductFilter";
 import api from "../lib/api";
 
 const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
-export default function ProductListPage() {
+export default function ProductListPage(isDarkMode) {
   /* State */
   const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock Product", price: "0.00" }]);
   const [sortIndex, setSortIndex] = useState(0);
@@ -37,13 +37,23 @@ export default function ProductListPage() {
       .then(setCategories)
       .catch(api.logError)
   }, [getProduct]);
+
+
+  /*var currentColorScheme = (isDarkMode) => {
+    if (isDarkMode == true) {
+      currentColorScheme = "white"
+    } else {
+      currentColorScheme = "black"
+    }
+  }*/
+
   /* Render */
   return (
     <div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <div className="d-flex align-items-center">
-            <span>Displaying <b><i>{products.length}</i></b> item{products.length !== 1 ? "s" : ""}</span>
+          <div className="d-flex align-items-center" >
+            <span id="itemNumber" style={{ color: isDarkMode }}>Displaying <b><i>{products.length}</i></b> item{products.length !== 1 ? "s" : ""}</span>
           </div>
           <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
         </div>

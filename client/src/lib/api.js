@@ -129,7 +129,7 @@ export default class Api {
   }
   static async addToCart(userId, productId) {
     try {
-      const res = await Axios.post(`${baseUrl}/comment`, {});
+      const res = await Axios.post(`${baseUrl}/user/${userId}/cart/product/${productId}`, {});
       return res.data;
     } catch (err) {
       throw err;
@@ -137,15 +137,16 @@ export default class Api {
   }
   static async removeFromCart(userId, productId) {
     try {
-      const res = await Axios.post(`${baseUrl}/comment`, {});
+      const res = await Axios.delete(`${baseUrl}/user/${userId}/cart/product/${productId}`);
       return res.data;
     } catch (err) {
       throw err;
     }
   }
-  static async updateCart(userId, productId, count) {
+  static async updateCart(userId, productId, quantity) {
     try {
-      const res = await Axios.post(`${baseUrl}/comment`, {});
+      const body = { quantity };
+      const res = await Axios.put(`${baseUrl}/user/${userId}/cart/product/${productId}`, body);
       return res.data;
     } catch (err) {
       throw err;
@@ -153,7 +154,7 @@ export default class Api {
   }
   static async getCartItem(userId, productId) {
     try {
-      const res = await Axios.post(`${baseUrl}/comment`, {});
+      const res = await Axios.get(`${baseUrl}/user/${userId}/cart/product/${productId}`);
       return res.data;
     } catch (err) {
       throw err;
@@ -161,7 +162,7 @@ export default class Api {
   }
   static async getUserCart(userId) {
     try {
-      const res = await Axios.post(`${baseUrl}/comment`, {});
+      const res = await Axios.post(`${baseUrl}/user/${userId}/cart`);
       return res.data;
     } catch (err) {
       throw err;

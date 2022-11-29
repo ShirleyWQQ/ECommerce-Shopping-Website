@@ -3,7 +3,7 @@ const base = "http://localhost:3001";
 const baseUrl = `${base}/api`;
 
 // Refer to ProductListPage
-function getProductsFiltering(sortIndex, rating, categories, priceRange) {
+function getProductsFiltering(sortIndex, rating, categories, priceRange, searchString) {
   let url = `${baseUrl}/products?`;
   switch (sortIndex) {
     case 1: // Price ASC
@@ -30,6 +30,9 @@ function getProductsFiltering(sortIndex, rating, categories, priceRange) {
     const arr = [priceRange.from, priceRange.to];
     url = `${url}&price=${arr.join("-")}`;
   }
+  if (searchString) {
+    url = `${url}&search=${searchString}`;
+  }
   console.log(url);
   return url;
 }
@@ -42,8 +45,8 @@ export default class Api {
       throw err;
     }
   }
-  static async getProducts(sortIndex, ratingIndex, selectedCategory, priceRange) {
-    const url = getProductsFiltering(sortIndex, ratingIndex, selectedCategory, priceRange);
+  static async getProducts(sortIndex, ratingIndex, selectedCategory, priceRange, searchString) {
+    const url = getProductsFiltering(sortIndex, ratingIndex, selectedCategory, priceRange, searchString);
     try {
       const res = await Axios.get(url)
       return res.data;
@@ -104,6 +107,62 @@ export default class Api {
   static async deleteComment(cid) {
     try {
       const res = await Axios.delete(`${baseUrl}/comment/${cid}`)
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async addComment(userId, productId, rating, content) {
+    try {
+      const body = {
+        userId, // number
+        rating, // number
+        content, // string
+        productId // number
+      };
+      const res = await Axios.post(`${baseUrl}/comment`, body);
+      // Success gives you the list of comment of the product (including the new one)
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async addToCart(userId, productId) {
+    try {
+      const res = await Axios.post(`${baseUrl}/user/${userId}/cart/product/${productId}`, {});
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async removeFromCart(userId, productId) {
+    try {
+      const res = await Axios.delete(`${baseUrl}/user/${userId}/cart/product/${productId}`);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async updateCart(userId, productId, quantity) {
+    try {
+      const body = { quantity };
+      const res = await Axios.put(`${baseUrl}/user/${userId}/cart/product/${productId}`, body);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async getCartItem(userId, productId) {
+    try {
+      const res = await Axios.get(`${baseUrl}/user/${userId}/cart/product/${productId}`);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async getUserCart(userId) {
+    try {
+      const res = await Axios.post(`${baseUrl}/user/${userId}/cart`);
       return res.data;
     } catch (err) {
       throw err;

@@ -8,7 +8,7 @@ import "./css/Header.css"
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { };
+        this.state = {}
     }
 
     render () {
@@ -22,14 +22,11 @@ export default class Header extends React.Component {
           <div className="col">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Search for Product</Form.Label>
-              <Form.Control /*type="email"*/ placeholder="Enter product name" />
+              <Form.Control /*type="email"*/ onChange={e => this.props.setSearchWord(e.target.value)} placeholder="Enter product name" />
               <Form.Text className="text-muted">
                 Click here to search for products.
               </Form.Text>
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Search
-            </Button>
           </div>
         </div>
       </div>

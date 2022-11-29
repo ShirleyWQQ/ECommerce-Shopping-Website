@@ -42,10 +42,10 @@ export default function ProductPage() {
         : <h1>Product Not Found</h1>
       }
       <div className="row">
-        <div className="col" id="comment">user_name</div>
-        <div className="col" id="comment">rating</div>
-        <div className="col" id="comment">updated_time</div>
-        <div className="col" id="comment">content</div>
+        <div className="col" id="comment">User</div>
+        <div className="col" id="comment">Rating</div>
+        <div className="col" id="comment">Reviewed time</div>
+        <div className="col" id="comment">Content</div>
         <div className="col" id="comment">Edit</div>
       </div>
       {comments.map((item, index) => (

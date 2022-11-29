@@ -31,6 +31,25 @@ module.exports = class Comment {
       callback(err, results);
     });
   }
+  static insert(rating, updateTime, content, userId, productId, callback) {
+    const maxIdQuery = "SELECT MAX(comment_id) AS comment_id FROM Comment;";
+    const insertQuery = "INSERT INTO Comment VALUES(?, ?, ?, ?, ?, ?);";
+    sql.execute(maxIdQuery, (err, results) => {
+      if (err) {
+        console.error(err);
+        callback(err, null);
+      }
+      const newId = results[0].comment_id + 1;
+      const insert = [newId, rating, updateTime, content, userId, productId];
+      sql.execute(insertQuery, insert, (err, results) => {
+        if (err) {
+          console.error(err);
+          return callback(err, results);
+        }
+        Comment.getByProductId(productId, callback);
+      });
+    });
+  }
 }
 
 /**

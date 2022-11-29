@@ -1,5 +1,21 @@
-
+const _ = require("lodash");
 const Comment = require("../database/Comment");
+function addComment(req, res) {
+  const { userId, rating, content, productId } = req.body;
+  if (!_.isString(content) || !_.isNumber(rating) ||
+    !_.isNumber(userId) || !_.isNumber(productId)) {
+    res.status(400);
+    return res.send("Bad Input");
+  }
+  const updateTime = new Date();
+  Comment.insert(rating, updateTime, content, userId, productId, (err, results) => {
+    if (err) {
+      res.status(500);
+      return res.send("Database Error");
+    }
+    res.send(results);
+  });
+}
 function getByProductId(req, res) {
   Comment.getByProductId(req.params["product_id"], (err, results) => {
     if (err) {
@@ -32,5 +48,5 @@ function deleteById(req, res) {
 }
 
 module.exports = {
-  getByProductId, getByUserId, deleteById
+  getByProductId, getByUserId, deleteById, addComment
 };

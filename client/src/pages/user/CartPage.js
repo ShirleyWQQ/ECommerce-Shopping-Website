@@ -11,22 +11,13 @@ function CartPage(props) {
   // states and varaibles
   const user = useSelector(selectUser);
   const userId = user?.user_id;
-  const quantity = props.quantity;
   var productName = "";
   var productId = 0;
 
   // methods
-  const addToCart = (productName) => {
-    Api.addToCart(userId, productName);
-  }
-
   const removeFromCart = (productName) => {
     Api.removeFromCart(userId, productName);
   }
-
-  const updateCart = useCallback(() => {
-    Api.updateCart(userId, productId, quantity);
-  }, [productId, quantity]);
 
   const getCartItem = useCallback(() => {
     Api.getCartItem(userId, productId);

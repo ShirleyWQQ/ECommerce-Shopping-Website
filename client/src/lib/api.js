@@ -162,7 +162,7 @@ export default class Api {
   }
   static async getUserCart(userId) {
     try {
-      const res = await Axios.post(`${baseUrl}/user/${userId}/cart`);
+      const res = await Axios.get(`${baseUrl}/user/${userId}/cart`);
       return res.data;
     } catch (err) {
       throw err;

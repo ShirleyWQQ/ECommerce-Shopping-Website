@@ -109,6 +109,21 @@ export default class Api {
       throw err;
     }
   }
+  static async addComment(userId, productId, rating, content) {
+    try {
+      const body = {
+        userId, // number
+        rating, // number
+        content, // string
+        productId // number
+      };
+      const res = await Axios.post(`${baseUrl}/comment`, body);
+      // Success gives you the list of comment of the product (including the new one)
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
   static logError(err) {
     alert(err);
   }

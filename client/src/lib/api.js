@@ -148,6 +148,14 @@ export default class Api {
       throw err;
     }
   }
+  static async getCartItem(userId, productId) {
+    try {
+      const res = await Axios.post(`${baseUrl}/comment`, {});
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
   static logError(err) {
     alert(err);
   }

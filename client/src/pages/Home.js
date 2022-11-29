@@ -8,7 +8,6 @@ import { useState } from "react";
 export default function Home() {
   const user = useSelector(selectUser);
   const isAdmin = useSelector(selectIsAdmin);
-<<<<<<< HEAD
 
   var isDarkMode = "white"
   const handleChange = event => {
@@ -28,19 +27,12 @@ export default function Home() {
 
     }
   };
-=======
-  const [searchWord, setSearchWord] = useState("");
->>>>>>> 7cd925ae500620732617fe82e63b548a86fa2e52
 
   return (
     <div style={{ paddingLeft: "20px" }}>
       <div className="container">
         <div className="row">
-<<<<<<< HEAD
-          <div className="col"><Header darkModeOn={isDarkMode}></Header></div>
-=======
           <div className="col"><Header setSearchWord={setSearchWord}></Header></div>
->>>>>>> 7cd925ae500620732617fe82e63b548a86fa2e52
           <div className="col">
             <div className="row" id="pages">Pages:</div>
             <div className="row"><Navigation /></div>
@@ -51,11 +43,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-      <div id="productList"><ProductListPage darkModeOn={isDarkMode}/></div>
-=======
       <div><ProductListPage searchWord={searchWord}/></div>
->>>>>>> 7cd925ae500620732617fe82e63b548a86fa2e52
     </div>
   )
 };

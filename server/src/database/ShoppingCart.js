@@ -8,7 +8,7 @@ module.exports = class Category {
    * @param {databaseCallback} callback 
    */
   static getByUserId(uid, callback) {
-    const query = "SELECT * FROM ShoppingCart JOIN Product WHERE user_id = ? AND ShoppingCart.product_id = Product.product_id;";
+    const query = "SELECT * FROM ShoppingCart NATURAL JOIN Product WHERE user_id = ? ;";
     const insert = [uid];
     sql.execute(query, insert, (err, results) => {
       if (err) console.error(err); 

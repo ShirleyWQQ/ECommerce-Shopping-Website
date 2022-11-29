@@ -5,7 +5,7 @@ import ProductFilter from "../components/ProductFilter";
 import api from "../lib/api";
 
 const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
-export default function ProductListPage() {
+export default function ProductListPage(props) {
   /* State */
   const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock Product", price: "0.00" }]);
   const [sortIndex, setSortIndex] = useState(0);
@@ -13,6 +13,8 @@ export default function ProductListPage() {
   const [categories, setCategories] = useState([{ category_id: 1, category_name: "Mock Category" }]);
   const [priceRange, setPriceRange] = useState({ from: null, to: null });
   const [selectedCategory, setSelectedCategory] = useState([]);
+  const searchWord = props.searchWord;
+
   /* Method */
   const sortOnSelect = (sortIndex) => { setSortIndex(sortIndex); };
   const ratingOnSelect = (ratingIndex) => { setRatingIndex(ratingIndex); };
@@ -26,10 +28,10 @@ export default function ProductListPage() {
   };
   /* Dependent Method */
   const getProduct = useCallback(() => {
-    api.getProducts(sortIndex, ratingIndex, selectedCategory, priceRange)
+    api.getProducts(sortIndex, ratingIndex, selectedCategory, priceRange, searchWord)
       .then(setProducts)
       .catch(api.logError);
-  }, [sortIndex, ratingIndex, selectedCategory, priceRange]);
+  }, [sortIndex, ratingIndex, selectedCategory, priceRange, searchWord]);
   /* Hook */
   useEffect(() => {
     getProduct();

@@ -55,7 +55,7 @@ module.exports = class Product {
       if (!_.isNil(options.filter.search)) {
         if (where.length !== WHERE.length) where += "AND ";
         where += "product_name LIKE ? ";
-        insert.push(`${options.filter.search}%`);
+        insert.push(`%${options.filter.search}%`);
       }
       if (where.length !== WHERE.length) query += where;
     }

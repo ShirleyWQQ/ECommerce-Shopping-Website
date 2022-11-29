@@ -48,6 +48,12 @@ function getAllProduct(req, res) {
       options.filter.price = { from: from, to: to };
     }
   }
+  // Search Filter
+  let search = req.query.search;
+  if (search) {
+    if (!options.filter) options.filter = {};
+    options.filter.search = search;
+  }
   // Call database
   Product.getAll(options, (err, results) => {
     if (err) {

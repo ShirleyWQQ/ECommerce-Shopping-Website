@@ -3,7 +3,7 @@ const base = "http://localhost:3001";
 const baseUrl = `${base}/api`;
 
 // Refer to ProductListPage
-function getProductsFiltering(sortIndex, rating, categories, priceRange) {
+function getProductsFiltering(sortIndex, rating, categories, priceRange, searchString) {
   let url = `${baseUrl}/products?`;
   switch (sortIndex) {
     case 1: // Price ASC
@@ -30,6 +30,9 @@ function getProductsFiltering(sortIndex, rating, categories, priceRange) {
     const arr = [priceRange.from, priceRange.to];
     url = `${url}&price=${arr.join("-")}`;
   }
+  if (searchString) {
+    url = `${url}&search=${searchString}`;
+  }
   console.log(url);
   return url;
 }
@@ -42,8 +45,8 @@ export default class Api {
       throw err;
     }
   }
-  static async getProducts(sortIndex, ratingIndex, selectedCategory, priceRange) {
-    const url = getProductsFiltering(sortIndex, ratingIndex, selectedCategory, priceRange);
+  static async getProducts(sortIndex, ratingIndex, selectedCategory, priceRange, searchString) {
+    const url = getProductsFiltering(sortIndex, ratingIndex, selectedCategory, priceRange, searchString);
     try {
       const res = await Axios.get(url)
       return res.data;

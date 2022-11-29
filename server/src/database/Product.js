@@ -37,7 +37,6 @@ module.exports = class Product {
       // Price
       if (!_.isNil(options.filter.price)) {
         const price = options.filter.price;
-        console.log(price);
         let values = "";
         if (price.from !== null) {
           values += "price >= ? ";
@@ -52,6 +51,11 @@ module.exports = class Product {
           if (where.length !== WHERE.length) where += "AND ";
           where += values;
         }
+      }
+      if (!_.isNil(options.filter.search)) {
+        if (where.length !== WHERE.length) where += "AND ";
+        where += "product_name LIKE ? ";
+        insert.push(`${options.filter.search}%`);
       }
       if (where.length !== WHERE.length) query += where;
     }

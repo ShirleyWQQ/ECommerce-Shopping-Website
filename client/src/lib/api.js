@@ -124,6 +124,30 @@ export default class Api {
       throw err;
     }
   }
+  static async addToCart(userId, productId) {
+    try {
+      const res = await Axios.post(`${baseUrl}/comment`, {});
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async removeFromCart(userId, productId) {
+    try {
+      const res = await Axios.post(`${baseUrl}/comment`, {});
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  static async updateCart(userId, productId, count) {
+    try {
+      const res = await Axios.post(`${baseUrl}/comment`, {});
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
   static logError(err) {
     alert(err);
   }

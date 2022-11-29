@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../stores/user";
 import ShoppingCart from "../../components/ShoppingCart";
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form";
 import Api from "../../lib/api";
 
 // props: data(product[])

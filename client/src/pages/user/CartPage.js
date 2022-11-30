@@ -57,7 +57,31 @@ function CartPage() {
           />
           ))}
       </div>
-      <div>{Number(total).toFixed(2)}</div>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div></div>
+          </div>
+          <div className="col">
+            <div></div>
+          </div>
+          <div className="col">
+            <div></div>
+          </div>
+          <div className="col">
+            <div></div>
+          </div>
+          <div className="col">
+            <div></div>
+          </div>
+          <div className="col">
+            <div></div>
+          </div>
+          <div className="col">
+            <div>Total: ${Number(total).toFixed(2)}</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

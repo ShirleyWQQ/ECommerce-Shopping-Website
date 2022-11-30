@@ -47,7 +47,7 @@ export default function ShoppingCart(props) {
           alert("Failed to retrieve products");
       });
   }
-
+  
   return (
     <div className="container">
       <div className="row">

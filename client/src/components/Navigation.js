@@ -5,15 +5,16 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, selectIsAdmin, logout } from "../stores/user";
-import { toggleDarkMode } from "../stores/state";
+import { toggleDarkMode, selectDarkMode } from "../stores/state";
 
 export default function Navigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const user = useSelector(selectUser);
   const isAdmin = useSelector(selectIsAdmin);
+  const isDark = useSelector(selectDarkMode);
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg={isDark ? "dark" : "light"} variant={isDark ? "dark" : "light"} expand="lg">
       <Container>
         <Navbar.Brand>
           <div className="col">

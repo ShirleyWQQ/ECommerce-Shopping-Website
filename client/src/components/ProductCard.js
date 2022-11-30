@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "react-bootstrap/Button"
 import { useNavigate } from "react-router-dom";
 import "./css/ProductCard.css";
@@ -7,8 +7,17 @@ import StarIcon from "../images/StarIcon";
 import { useSelector } from "react-redux";
 import { selectUser } from "../stores/user";
 import Api from "../lib/api";
+import { selectDarkMode } from "../stores/state";
+import handleDarkModeChange from "../lib/darkmode";
 
 function PrintStars(props) {
+  const isDark = useSelector(selectDarkMode);
+  useEffect(() => {
+    handleDarkModeChange(isDark)
+  }, [isDark]);
+  useEffect(() => {
+    handleDarkModeChange(isDark);
+  });
   const num = Math.round(parseFloat(props.number));
   if (num === 6) {
     return <div id="rating">{props.number}<StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>

@@ -6,7 +6,7 @@ import ProductFilter from "../components/ProductFilter";
 import api from "../lib/api";
 
 const sortOptions = ["None", "Price ascending", "Price descending", "Rating ascending", "Rating descending"];
-export default function ProductListPage(props) {
+export default function ProductListPage() {
   /* State */
   const [products, setProducts] = useState([{ product_id: 1, product_name: "Mock Product", price: "0.00" }]);
   const [sortIndex, setSortIndex] = useState(0);
@@ -56,7 +56,6 @@ export default function ProductListPage(props) {
             selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect}
             categories={categories} changeCategory={changeCategory}
             setPriceRange={changePriceRange}
-            darkMode={props.darkMode}
           />
           <ProductList data={products} />
         </div>

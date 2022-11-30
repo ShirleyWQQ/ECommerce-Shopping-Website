@@ -24,7 +24,7 @@ function CartPage() {
   const user = useSelector(selectUser);
 
   const [items, setItems] = useState([]);
-  const [ctotal, setCtotal] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     if (user !== null) {
@@ -35,6 +35,12 @@ function CartPage() {
       navigate("/login");
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    items.map((item) => {
+      setTotal(total + item.quantity * item.price);
+    })
+  }, [items])
 
   return (
     <div>
@@ -49,12 +55,11 @@ function CartPage() {
             price={roundNumber(item.price, 2)}
             product_id={item.product_id}
             total={item.quantity * item.price}
-            setCtotal={ctotal + item.quantity * item.price}
             setItems={setItems}
           />
-        ))}
+          ))}
       </div>
-      <div>{ctotal}</div>
+      <div>{total}</div>
     </div>
   );
 }

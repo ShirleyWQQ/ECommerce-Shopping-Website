@@ -5,7 +5,7 @@ function addComment(req, res) {
   if (!_.isString(content) || !_.isNumber(rating) ||
     !_.isNumber(userId) || !_.isNumber(productId)) {
     res.status(400);
-    return res.send("Bad Input");
+    return res.send(JSON.stringify(req.body));
   }
   const updateTime = new Date();
   Comment.insert(rating, updateTime, content, userId, productId, (err, results) => {

@@ -14,11 +14,14 @@ export default function ProductPage() {
   const { product_id } = useParams();
   const [product, setProduct] = useState(null);
   const [comments, setComments] = useState([]);
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState("1");
   const [content, setContent] = useState("");
+  const [hasComment, setHasComment] = useState(false);
 
-  const deleteComment = (cid) => {
-    Api.deleteComment(cid)
+  const deleteComment = () => {
+    if (!user) return;
+    const found = comments.find(v => v.user_id === user.user_id);
+    Api.deleteComment(found.comment_id)
       .then(() => {
         Api.getProduct(product_id)
           .then(setProduct)
@@ -26,11 +29,33 @@ export default function ProductPage() {
         Api.getComments(product_id)
           .then(setComments)
           .catch(Api.logError);
+        setContent("");
+        setRating("1");
       })
       .catch(Api.logError);
   };
   const addComment = () => {
     Api.addComment(user.user_id, parseInt(product_id), parseInt(rating), content)
+      .then(res => {
+        Api.getProduct(product_id)
+          .then(setProduct)
+          .catch(Api.logError);
+        Api.getComments(product_id)
+          .then(setComments)
+          .catch(Api.logError);
+      })
+      .catch(err => {
+        if (err.response) {
+          alert("adding Failed");
+        } else
+          alert("Failed to retrieve products");
+      });
+  };
+  
+  const editComment = () => {
+    if (!user) return;
+    const found = comments.find(v => v.user_id === user.user_id);
+    Api.editComment(found.comment_id, parseInt(rating), content)
       .then(res => {
         Api.getProduct(product_id)
           .then(setProduct)
@@ -54,6 +79,17 @@ export default function ProductPage() {
       .then(setComments)
       .catch(Api.logError);
   }, [product_id]);
+  useEffect(() => {
+    if (user) {
+      const found = comments.find(v => v.user_id === user.user_id);
+      if (!found) setHasComment(false);
+      else {
+        setHasComment(true);
+        setContent(found.content);
+        setRating(found.rating)
+      }
+    }
+  }, [user, comments]);
   return (
     <div>
       {product
@@ -71,7 +107,6 @@ export default function ProductPage() {
         <div className="col" id="comment">Rating</div>
         <div className="col" id="comment">Reviewed time</div>
         <div className="col" id="comment">Content</div>
-        <div className="col" id="comment">Edit</div>
       </div>
       {comments.map((item, index) => (
         <Comment
@@ -82,16 +117,15 @@ export default function ProductPage() {
           content={item.content}
           user_id={item.user_id}
           comment_id={item.comment_id}
-          onDelete={deleteComment}
         />
       ))}
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
       {user
         ? <Form>
           <Form.Label style={{ fontWeight: "500" }} className="font-weight-bold">Rating</Form.Label>
-          <Form.Select aria-label="Default select example" onChange={e => setRating(e.target.value)}>
+          <Form.Select aria-label="Default select example" value={rating} onChange={e => setRating(e.target.value)}>
             <option value="1">★Run away now</option>
             <option value="2">★★Buy it unless you get no other choice</option>
             <option value="3">★★★Just so so</option>
@@ -100,10 +134,19 @@ export default function ProductPage() {
           </Form.Select>
           <Form.Label style={{ fontWeight: "500" }}>Comment</Form.Label>
           <Form.Control type="string" placeholder="I would say:" value={content} onChange={e => setContent(e.target.value)} />
-          <br/>
-          <Button style={{ marginRight: "5px" }} onClick={() => addComment()}>
-            Add Comment
-          </Button>
+          <br />
+          {hasComment
+            ? <div>
+              <Button style={{ marginRight: "5px" }} onClick={() => editComment()}>
+                Edit Comment
+              </Button>
+              <Button style={{ marginRight: "5px" }} onClick={() => deleteComment()}>
+                Delete Comment
+              </Button>
+            </div>
+            : <Button style={{ marginRight: "5px" }} onClick={() => addComment()}>
+              Add Comment
+            </Button>}
 
         </Form>
         : ""}

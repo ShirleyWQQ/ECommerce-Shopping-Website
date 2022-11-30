@@ -4,6 +4,10 @@ import Button from "react-bootstrap/Button"
 import { useNavigate } from "react-router-dom";
 import "./css/ProductCard.css";
 import StarIcon from "../images/StarIcon";
+import { useSelector } from "react-redux";
+import { selectUser, selectIsAdmin } from "../stores/user";
+import Api from "../lib/api";
+
 function PrintStars(props) {
   const num = parseFloat(props.number);
   if (num > 4) {
@@ -15,14 +19,34 @@ function PrintStars(props) {
   }
   return <div id="rating">{props.number}<StarIcon /></div>
 }
+
 // props: name price description
 export default function ProductCard(props) {
+  const user = useSelector(selectUser);
+  const addUpdateCart = () => {
+    const product_id = props.product_id;
+    const user_id = user?.user_id;
+    Api.getCartItem(user_id, product_id)
+    .then(res => {
+      if (res.length === 0) {
+        Api.addToCart(user_id, product_id);
+      } else {
+        Api.updateCart(user_id, product_id, res[0].quantity + 1);
+      }
+    })
+    .catch(err => {
+      if (err.response) {
+        alert("Login Failed");
+      } else
+        alert("Failed to retrieve products");
+    });
+  }
   const navigate = useNavigate();
   return (
     <div className="card" style={{width: '18rem'}}>
       <div class="container">
         <img className="card-img-top" src={props.image} id="img1" alt="no image available" />
-        <Button classname="button button1" id="button">+</Button>
+        <Button classname="button button1" id="button" onClick={addUpdateCart}>+</Button>
       </div>
       <div className="card-body">
         <h5 className="price" id="price">${props.price}</h5>

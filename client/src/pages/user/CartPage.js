@@ -32,6 +32,7 @@ function CartPage() {
             productName={item.product_name}
             quantity={item.quantity}
             price={item.price}
+            product_id={item.product_id}
           />
         ))}
       </div>

@@ -87,9 +87,9 @@ export default function ProductPage() {
           onDelete={deleteComment}
         />
       ))}
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
+      <br/>
+      <br/>
+      <br/>
       {user
         ? <Form>
           <Form.Label style={{ fontWeight: "500" }} className="font-weight-bold">Rating</Form.Label>

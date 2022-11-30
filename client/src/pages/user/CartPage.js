@@ -5,26 +5,26 @@ import { selectUser } from "../../stores/user";
 import ShoppingCart from "../../components/ShoppingCart";
 import api from "../../lib/api";
 
-function roundNumber(num, scale) {
-  if(!("" + num).includes("e")) {
-    return +(Math.round(num + "e+" + scale)  + "e-" + scale);
-  } else {
-    var arr = ("" + num).split("e");
-    var sig = ""
-    if(+arr[1] + scale > 0) {
-      sig = "+";
-    }
-    return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
-  }
-}
+// function roundNumber(num, scale) {
+//   if(!("" + num).includes("e")) {
+//     return +(Math.round(num + "e+" + scale)  + "e-" + scale);
+//   } else {
+//     var arr = ("" + num).split("e");
+//     var sig = ""
+//     if(+arr[1] + scale > 0) {
+//       sig = "+";
+//     }
+//     return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
+//   }
+// }
 
 // props:
 function CartPage() {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
-
   const [items, setItems] = useState([]);
-  const [total, setTotal] = useState(0);
+  const initialTotal = items.reduce((acc, item) => acc + item.quantity * item.price, 0)
+  const [total, setTotal] = useState(initialTotal);
 
   useEffect(() => {
     if (user !== null) {
@@ -37,9 +37,7 @@ function CartPage() {
   }, [user, navigate]);
 
   useEffect(() => {
-    items.map((item) => {
-      setTotal(total + item.quantity * item.price);
-    })
+   setTotal(items.reduce((acc, item) => acc + (item.quantity * (item.price*100))/100, 0));
   }, [items])
 
   return (
@@ -52,9 +50,9 @@ function CartPage() {
             image={item.picture_source}
             productName={item.product_name}
             quantity={item.quantity}
-            price={roundNumber(item.price, 2)}
+            price={item.price}
             product_id={item.product_id}
-            total={item.quantity * item.price}
+            total={(item.quantity * (item.price*100))/100}
             setItems={setItems}
           />
           ))}

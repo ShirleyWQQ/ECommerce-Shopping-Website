@@ -22,9 +22,9 @@ function roundNumber(num, scale) {
 function CartPage() {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
-
   const [items, setItems] = useState([]);
-  const [total, setTotal] = useState(0);
+  const initialTotal = items.reduce((acc, item) => acc + item.quantity * item.price, 0)
+  const [total, setTotal] = useState(initialTotal);
 
   useEffect(() => {
     if (user !== null) {
@@ -37,9 +37,7 @@ function CartPage() {
   }, [user, navigate]);
 
   useEffect(() => {
-    items.map((item) => {
-      setTotal(total + item.quantity * item.price);
-    })
+   setTotal(items.reduce((acc, item) => acc + item.quantity * item.price, 0));
   }, [items])
 
   return (

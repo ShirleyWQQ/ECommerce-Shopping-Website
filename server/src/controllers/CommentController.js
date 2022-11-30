@@ -46,7 +46,23 @@ function deleteById(req, res) {
     return res.send(results);
   });
 }
+function editComment(req, res) {
+  const commentId = req.params["comment_id"];
+  const { rating, content } = req.body;
+  if (!_.isString(content) || !_.isNumber(rating)) {
+    res.status(400);
+    return res.send("Bad Input");
+  }
+  const updateTime = new Date();
+  Comment.updateById(commentId, content, rating, updateTime, (err, results) => {
+    if (err) {
+      res.status(500);
+      return res.send("Database Error");
+    }
+    res.send(results);
+  });
+}
 
 module.exports = {
-  getByProductId, getByUserId, deleteById, addComment
+  getByProductId, getByUserId, deleteById, addComment, editComment
 };

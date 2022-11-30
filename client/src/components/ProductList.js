@@ -42,10 +42,10 @@ export default function ProductList(props) {
         ))}
       </div>
       <Pagination>
-        {paginationRange.map(page => {
-          if (page === currentPage) return <Pagination.Item active>{page}</Pagination.Item>
-          else if (page === DOTS) return <Pagination.Ellipsis disabled />
-          else return <Pagination.Item onClick={() => { setCurrentPage(page) }}>{page}</Pagination.Item>
+        {paginationRange.map((page, idx) => {
+          if (page === currentPage) return <Pagination.Item active key={idx}>{page}</Pagination.Item>
+          else if (page === DOTS) return <Pagination.Ellipsis disabled key={idx} />
+          else return <Pagination.Item onClick={() => { setCurrentPage(page) }} key={idx}>{page}</Pagination.Item>
         })}
       </Pagination>
     </div>

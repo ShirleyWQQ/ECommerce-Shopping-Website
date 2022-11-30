@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import Axios from "axios";
 import Counter1 from "./Counter1"
@@ -30,7 +31,7 @@ export default class ServerCheck extends React.Component {
   }
   render() {
     return (
-      <div class="flex-container">
+      <div className="flex-container">
               {this.state.products.map(item => (
                 <div className="card" style={{width: '18rem'}}>
                   <img className="card-img-top" src="logo192.png" alt="Card image cap" />

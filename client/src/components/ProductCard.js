@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./css/ProductCard.css";
 import StarIcon from "../images/StarIcon";
 import { useSelector } from "react-redux";
-import { selectUser, selectIsAdmin } from "../stores/user";
+import { selectUser } from "../stores/user";
 import Api from "../lib/api";
 
 function PrintStars(props) {
@@ -27,30 +27,30 @@ export default function ProductCard(props) {
     const product_id = props.product_id;
     const user_id = user?.user_id;
     Api.getCartItem(user_id, product_id)
-    .then(res => {
-      if (res.length === 0) {
-        Api.addToCart(user_id, product_id);
-      } else {
-        Api.updateCart(user_id, product_id, res[0].quantity + 1);
-      }
-    })
-    .catch(err => {
-      if (err.response) {
-        alert("Login Failed");
-      } else
-        alert("Failed to retrieve products");
-    });
+      .then(res => {
+        if (res.length === 0) {
+          Api.addToCart(user_id, product_id);
+        } else {
+          Api.updateCart(user_id, product_id, res[0].quantity + 1);
+        }
+      })
+      .catch(err => {
+        if (err.response) {
+          alert("Login Failed");
+        } else
+          alert("Failed to retrieve products");
+      });
   }
   const navigate = useNavigate();
   return (
-    <div className="card" style={{width: '18rem'}}>
-      <div class="container">
+    <div className="card" style={{ width: '18rem' }}>
+      <div className="container">
         <img className="card-img-top" src={props.image} id="img1" alt="no image available" />
-        <Button classname="button button1" id="button" onClick={addUpdateCart}>+</Button>
+        <Button className="button button1" id="button" onClick={addUpdateCart}>+</Button>
       </div>
       <div className="card-body">
         <h5 className="price" id="price">${props.price}</h5>
-        <h5 className="card-title" id="para0" onClick={() => {navigate(`/product/${props.product_id}`)}}>{props.name}</h5>
+        <h5 className="card-title" id="para0" onClick={() => { navigate(`/product/${props.product_id}`) }}>{props.name}</h5>
         <p className="card-text" id="para">{props.description}</p>
         <h5 className="rating">
           <PrintStars number={props.rating} />

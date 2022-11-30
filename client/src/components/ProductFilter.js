@@ -117,7 +117,7 @@ export default function ProductFilter(props) {
         <Button onClick={handleClearPriceRange} style={{ marginLeft: "7px", marginRight: "7px", maxHeight: "35px" }} variant="primary" size="sm">
           Clear
         </Button>
-        {displayErrorForPrice && <p class="text-danger">Invalid Price Range</p>}
+        {displayErrorForPrice && <p className="text-danger">Invalid Price Range</p>}
       </Form>
 
     </div>

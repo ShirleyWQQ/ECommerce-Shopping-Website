@@ -127,6 +127,18 @@ export default class Api {
       throw err;
     }
   }
+  static async editComment(cid, rating, content) {
+    try {
+      const body = {
+        rating, // number
+        content, // string
+      };
+      const res = await Axios.post(`${baseUrl}/comment/${cid}`, body);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  }
   static async addToCart(userId, productId) {
     try {
       const res = await Axios.post(`${baseUrl}/user/${userId}/cart/product/${productId}`, {});

@@ -33,6 +33,7 @@ function CartPage() {
             quantity={item.quantity}
             price={item.price}
             product_id={item.product_id}
+            setItems={setItems}
           />
         ))}
       </div>

@@ -14,9 +14,13 @@ export default function ShoppingCart(props) {
     Api.getCartItem(user_id, product_id)
       .then(res => {
         if ((res.length !== 0) && (res[0].quantity === 1)) {
-          Api.removeFromCart(user_id, product_id);
+          Api.removeFromCart(user_id, product_id).then(res1 => {
+            props.setItems(res1);
+          }).catch(err => alert("Add to shopping cart failed"))
         } else {
-          Api.updateCart(user_id, product_id, res[0].quantity - 1);
+          Api.updateCart(user_id, product_id, res[0].quantity - 1).then(res2 => {
+            props.setItems(res2);
+          }).catch(err => alert ("Add to shopping cart failed"));
         }
       })
       .catch(err => {
@@ -26,6 +30,7 @@ export default function ShoppingCart(props) {
           alert("Failed to retrieve products");
       });
   }
+
   return (
     <div className="container">
       <div className="row">

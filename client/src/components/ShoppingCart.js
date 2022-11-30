@@ -61,9 +61,16 @@ export default function ShoppingCart(props) {
           <h5 className="price">${props.price}</h5>
         </div>
         <div className="col">
-          <Button onClick={removeFromCart}>-</Button>
-          <h5 className="quantity">{props.quantity}</h5>
           <Button onClick={addUpdateCart}>+</Button>
+        </div>
+        <div className="col">
+          <h5 className="quantity">{props.quantity}</h5>
+        </div>
+        <div className="col">
+          <Button onClick={removeFromCart}>-</Button>
+        </div>
+        <div className="col">
+          <div>${props.total}</div>
         </div>
       </div>
     </div>

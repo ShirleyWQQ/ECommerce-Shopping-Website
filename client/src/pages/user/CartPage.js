@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { selectUser } from "../../stores/user";
 import ShoppingCart from "../../components/ShoppingCart";
 import api from "../../lib/api";
-
+import "./CartPage.css"
 // function roundNumber(num, scale) {
 //   if(!("" + num).includes("e")) {
 //     return +(Math.round(num + "e+" + scale)  + "e-" + scale);
@@ -78,7 +78,7 @@ function CartPage() {
             <div></div>
           </div>
           <div className="col">
-            <div>Total: ${Number(total).toFixed(2)}</div>
+            <div id="ctotal">Total: ${Number(total).toFixed(2)}</div>
           </div>
         </div>
       </div>

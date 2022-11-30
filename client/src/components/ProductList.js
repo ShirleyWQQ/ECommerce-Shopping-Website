@@ -8,7 +8,7 @@ import Pagination from 'react-bootstrap/Pagination';
 
 // props: data(product[])
 export default function ProductList(props) {
-  const PageSize = 5;
+  const PageSize = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
   const currentTableData = useMemo(() => {

@@ -49,7 +49,7 @@ export default function ProductCard(props) {
   }
   const navigate = useNavigate();
   return (
-    <div className="card" style={{ width: '18rem' }}>
+    <div className="card product-card" style={{ width: '18rem' }}>
       <div className="container">
         <img className="card-img-top" src={props.image} id="img1" alt="no image available" />
         <Button className="button button1" id="button" onClick={addUpdateCart}>+</Button>

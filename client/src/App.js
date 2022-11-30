@@ -14,16 +14,7 @@ import "./App.css"
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectDarkMode } from "./stores/state";
-
-const handleDarkModeChange = (isDark) => {
-  if (isDark) {
-    console.log("DARKMODE");
-    console.log(document.body.style.background = "#000000");
-  } else {
-    console.log("LIGHTMODE");
-    console.log(document.body.style.background = "white");
-  }
-};
+import handleDarkModeChange from "./lib/darkmode";
 
 function App() {
   const isDark = useSelector(selectDarkMode);

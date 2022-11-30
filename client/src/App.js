@@ -8,10 +8,12 @@ import RegisterPage from "./pages/user/RegisterPage";
 import ProductPage from "./pages/ProductPage";
 import AdminPage from "./pages/AdminPage";
 import CartPage from "./pages/user/CartPage"
+import Navigation from "./components/Navigation";
 
 function App() {
   return (
     <BrowserRouter>
+      <Navigation/>
       <Routes>
         <Route path="/" element={<Home />} ></Route>
         <Route path="/products" element={<ProductListPage />} ></Route>

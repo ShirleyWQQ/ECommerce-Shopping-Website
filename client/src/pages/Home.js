@@ -2,7 +2,7 @@ import ProductListPage from "./ProductListPage";
 import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { selectUser, selectIsAdmin } from "../stores/user";
-import Navigation from ".././components/examples/Navigation";
+import Navigation from "../components/Navigation";
 import { useState } from "react";
 
 export default function Home() {
@@ -34,11 +34,8 @@ export default function Home() {
         <div className="row">
           <div className="col"><Header setSearchWord={setSearchWord}></Header></div>
           <div className="col">
-            <div className="row" id="pages">Pages:</div>
-            <div className="row"><Navigation /></div>
             <div className="row" id="darkButton">Dark Mode:</div>
             <input type="checkbox" id="darkToggle" htmlFor="darkToggle" onChange={handleDarkModeChange}></input>
-            <div className="row" id="greeting"><h1>Hello, {isAdmin ? "Admin" : (user ? "User" : "Guest")} {user?.user_name}!</h1></div>
           </div>
         </div>
       </div>

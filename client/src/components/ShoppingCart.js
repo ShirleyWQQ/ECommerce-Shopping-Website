@@ -20,7 +20,7 @@ export default function ShoppingCart(props) {
         } else {
           Api.updateCart(user_id, product_id, res[0].quantity - 1).then(res2 => {
             props.setItems(res2);
-          }).catch(err => alert ("Add to shopping cart failed"));
+          }).catch(err => alert("Add to shopping cart failed"));
         }
       })
       .catch(err => {
@@ -36,9 +36,9 @@ export default function ShoppingCart(props) {
     const user_id = user?.user_id;
     Api.getCartItem(user_id, product_id)
       .then(res => {
-          Api.updateCart(user_id, product_id, res[0].quantity + 1).then(res1 => {
-            props.setItems(res1);
-          }).catch(err => alert("Add to shopping cart failed"));
+        Api.updateCart(user_id, product_id, res[0].quantity + 1).then(res1 => {
+          props.setItems(res1);
+        }).catch(err => alert("Add to shopping cart failed"));
       })
       .catch(err => {
         if (err.response) {
@@ -47,7 +47,7 @@ export default function ShoppingCart(props) {
           alert("Failed to retrieve products");
       });
   }
-  
+
   return (
     <div className="container">
       <div className="row">
@@ -70,7 +70,21 @@ export default function ShoppingCart(props) {
           <Button onClick={removeFromCart}>-</Button>
         </div>
         <div className="col">
-          <div>${props.total}</div>
+          <div>${props.total.toFixed(2)}</div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+        </div>
+        <div className="col">
+        </div>
+        <div className="col">
+        </div>
+        <div className="col">
+        </div>
+        <div className="col">
+        </div>
+        <div className="col">
         </div>
       </div>
     </div>

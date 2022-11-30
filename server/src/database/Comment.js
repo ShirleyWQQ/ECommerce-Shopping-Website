@@ -50,6 +50,14 @@ module.exports = class Comment {
       });
     });
   }
+  static updateById(comment_id, content, rating, updateTime, callback) {
+    const query = "UPDATE Comment SET content = ?, rating = ?, updated_time=? WHERE comment_id = ?;";
+    const insert = [content, rating, updateTime, comment_id];
+    sql.execute(query, insert, (err, results) => {
+      if (err) console.error(err);
+      callback(err, results);
+    });
+  }
 }
 
 /**

@@ -14,6 +14,7 @@ router.delete("/product/:product_id", ProductController.deleteProductById);
 router.get("/product/:product_id/comments", CommentController.getByProductId);
 
 router.get("/user/:user_id/comments", CommentController.getByUserId);
+router.post("/comment/:comment_id", CommentController.editComment);
 router.delete("/comment/:comment_id", CommentController.deleteById);;
 router.post("/comment", CommentController.addComment);
 

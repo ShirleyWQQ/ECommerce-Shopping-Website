@@ -11,9 +11,27 @@ import CartPage from "./pages/user/CartPage"
 import Navigation from "./components/Navigation";
 import "./App.css"
 
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectDarkMode } from "./stores/state";
+
+const handleDarkModeChange = (isDark) => {
+  if (isDark) {
+    console.log("DARKMODE");
+    console.log(document.body.style.background = "#000000");
+  } else {
+    console.log("LIGHTMODE");
+    console.log(document.body.style.background = "white");
+  }
+};
+
 function App() {
+  const isDark = useSelector(selectDarkMode);
+  useEffect(() => {
+    handleDarkModeChange(isDark)
+  }, [isDark]);
   return (
-    <div className="">
+    <div>
       <BrowserRouter>
         <Navigation />
         <Routes>

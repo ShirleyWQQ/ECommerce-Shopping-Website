@@ -23,7 +23,7 @@ function CartPage() {
   const navigate = useNavigate();
   const user = useSelector(selectUser);
   const [items, setItems] = useState([]);
-  const initialTotal = items.reduce((acc, item) => acc + item.quantity * item.price, 0)
+  const initialTotal = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
   const [total, setTotal] = useState(initialTotal);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function CartPage() {
   }, [user, navigate]);
 
   useEffect(() => {
-   setTotal(items.reduce((acc, item) => acc + (item.quantity * (item.price*100))/100, 0));
+   setTotal(items.reduce((acc, item) => acc + item.quantity * item.price, 0));
   }, [items])
 
   return (
@@ -57,7 +57,7 @@ function CartPage() {
           />
           ))}
       </div>
-      <div>{total}</div>
+      <div>{Number(total).toFixed(2)}</div>
     </div>
   );
 }

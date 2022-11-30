@@ -8,6 +8,13 @@ import "./css/ProductFilter.css";
 // props: selectedIndex, setSelectedIndex
 // props: categories changeCategory
 export default function ProductFilter(props) {
+  // const [backgroundColour, setBackgroundColour] = useState("White");
+  // useEffect(() => {
+  //   setBackGroundColour()
+
+  // }, [darkMode]);
+
+  
   const [priceBegin, setPriceBegin] = useState("");
   const [priceEnd, setPriceEnd] = useState("");
   const [displayErrorForPrice, setDisplayErrorForPrice] = useState(false);

@@ -9,8 +9,10 @@ export default function Home() {
   const user = useSelector(selectUser);
   const isAdmin = useSelector(selectIsAdmin);
   const [searchWord, setSearchWord] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
 
-  const handleChange = event => {
+    const handleDarkModeChange= event => {
+    setDarkMode(true);
     if (event.target.checked) {
       document.getElementById('pages').style.color = "white"
       document.getElementById('greeting').style.color = "white"
@@ -35,12 +37,12 @@ export default function Home() {
             <div className="row" id="pages">Pages:</div>
             <div className="row"><Navigation /></div>
             <div className="row" id="darkButton">Dark Mode:</div>
-            <input type="checkbox" id="darkToggle" htmlFor="darkToggle" onChange={handleChange}></input>
+            <input type="checkbox" id="darkToggle" htmlFor="darkToggle" onChange={handleDarkModeChange}></input>
             <div className="row" id="greeting"><h1>Hello, {isAdmin ? "Admin" : (user ? "User" : "Guest")} {user?.user_name}!</h1></div>
           </div>
         </div>
       </div>
-      <div><ProductListPage searchWord={searchWord} /></div>
+      <div><ProductListPage darkMode={darkMode} searchWord={searchWord} /></div>
     </div>
   )
 };

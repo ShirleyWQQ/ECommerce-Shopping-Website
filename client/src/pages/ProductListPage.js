@@ -15,6 +15,8 @@ export default function ProductListPage(props) {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const searchWord = props.searchWord;
 
+  // console.log("colour from ",props.darkMode);
+
   /* Method */
   const sortOnSelect = (sortIndex) => { setSortIndex(sortIndex); };
   const ratingOnSelect = (ratingIndex) => { setRatingIndex(ratingIndex); };
@@ -54,6 +56,7 @@ export default function ProductListPage(props) {
             selectedIndex={ratingIndex} setSelectedIndex={ratingOnSelect}
             categories={categories} changeCategory={changeCategory}
             setPriceRange={changePriceRange}
+            darkMode={props.darkMode}
           />
           <ProductList data={products} />
         </div>

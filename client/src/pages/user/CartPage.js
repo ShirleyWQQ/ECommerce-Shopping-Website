@@ -24,6 +24,8 @@ function CartPage() {
   const user = useSelector(selectUser);
 
   const [items, setItems] = useState([]);
+  const [ctotal, setCtotal] = useState(0);
+
   useEffect(() => {
     if (user !== null) {
       api.getUserCart(user.user_id)
@@ -47,10 +49,12 @@ function CartPage() {
             price={roundNumber(item.price, 2)}
             product_id={item.product_id}
             total={item.quantity * item.price}
+            setCtotal={ctotal + item.quantity * item.price}
             setItems={setItems}
           />
         ))}
       </div>
+      <div>{ctotal}</div>
     </div>
   );
 }

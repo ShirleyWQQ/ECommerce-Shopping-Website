@@ -9,25 +9,28 @@ import ProductPage from "./pages/ProductPage";
 import AdminPage from "./pages/AdminPage";
 import CartPage from "./pages/user/CartPage"
 import Navigation from "./components/Navigation";
+import "./App.css"
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navigation/>
-      <Routes>
-        <Route path="/" element={<Home />} ></Route>
-        <Route path="/products" element={<ProductListPage />} ></Route>
-        <Route path="/product/:product_id" element={<ProductPage />} ></Route>
-        <Route path="/login" element={<LoginPage />} ></Route>
-        <Route path="/register" element={<RegisterPage />} ></Route>
-        <Route path="/cart" element={<CartPage />} ></Route>
-        <Route path="/user" element={<Home />} ></Route>
-        <Route path="/admin" element={<AdminPage />} ></Route>
-        <Route path="/example" element={<ExamplePage />}></Route>
-        <Route path="*" element={<NoPage />} />
-        <Route path="/404" element={<NoPage />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="">
+      <BrowserRouter>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />} ></Route>
+          <Route path="/products" element={<ProductListPage />} ></Route>
+          <Route path="/product/:product_id" element={<ProductPage />} ></Route>
+          <Route path="/login" element={<LoginPage />} ></Route>
+          <Route path="/register" element={<RegisterPage />} ></Route>
+          <Route path="/cart" element={<CartPage />} ></Route>
+          <Route path="/user" element={<Home />} ></Route>
+          <Route path="/admin" element={<AdminPage />} ></Route>
+          <Route path="/example" element={<ExamplePage />}></Route>
+          <Route path="*" element={<NoPage />} />
+          <Route path="/404" element={<NoPage />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

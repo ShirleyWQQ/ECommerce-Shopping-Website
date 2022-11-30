@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import Form from 'react-bootstrap/Form';
 import ProductList from "../components/ProductList";
 import ProductSort from "../components/ProductSort";
 import ProductFilter from "../components/ProductFilter";
@@ -13,9 +14,7 @@ export default function ProductListPage(props) {
   const [categories, setCategories] = useState([{ category_id: 1, category_name: "Mock Category" }]);
   const [priceRange, setPriceRange] = useState({ from: null, to: null });
   const [selectedCategory, setSelectedCategory] = useState([]);
-  const searchWord = props.searchWord;
-
-  // console.log("colour from ",props.darkMode);
+  const [searchWord, setSearchWord] = useState("");
 
   /* Method */
   const sortOnSelect = (sortIndex) => { setSortIndex(sortIndex); };
@@ -46,6 +45,7 @@ export default function ProductListPage(props) {
     <div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", flexDirection: "row" }}>
+          <Form.Control onChange={e => setSearchWord(e.target.value)} placeholder="Enter product name" />
           <div className="d-flex align-items-center">
             <span>Displaying <b><i>{products.length}</i></b> item{products.length !== 1 ? "s" : ""}</span>
           </div>

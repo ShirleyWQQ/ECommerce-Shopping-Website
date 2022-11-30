@@ -1,5 +1,4 @@
 import ProductListPage from "./ProductListPage";
-import Header from "../components/Header";
 import { useSelector } from "react-redux";
 import { selectUser, selectIsAdmin } from "../stores/user";
 import Navigation from "../components/Navigation";
@@ -30,16 +29,15 @@ export default function Home() {
 
   return (
     <div style={{ paddingLeft: "20px" }}>
-      <div className="container">
+      {/* <div className="container">
         <div className="row">
-          <div className="col"><Header setSearchWord={setSearchWord}></Header></div>
           <div className="col">
             <div className="row" id="darkButton">Dark Mode:</div>
             <input type="checkbox" id="darkToggle" htmlFor="darkToggle" onChange={handleDarkModeChange}></input>
           </div>
         </div>
-      </div>
-      <div><ProductListPage darkMode={darkMode} searchWord={searchWord} /></div>
+      </div> */}
+      <div><ProductListPage darkMode={darkMode}/></div>
     </div>
   )
 };

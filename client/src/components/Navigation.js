@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { selectUser, selectIsAdmin } from "../stores/user";
-import { logout } from "../stores/user";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import "./css/Header.css"
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, selectIsAdmin, logout } from "../stores/user";
 
 export default function Navigation() {
   const navigate = useNavigate();

@@ -36,15 +36,9 @@ export default function ShoppingCart(props) {
     const user_id = user?.user_id;
     Api.getCartItem(user_id, product_id)
       .then(res => {
-        if (res.length === 0) {
-          Api.addToCart(user_id, product_id.then(res1 => {
-            props.setItems(res1);
-          }).catch(err => alert("Add to shopping cart failed")));
-        } else {
           Api.updateCart(user_id, product_id, res[0].quantity + 1).then(res1 => {
             props.setItems(res1);
           }).catch(err => alert("Add to shopping cart failed"));
-        }
       })
       .catch(err => {
         if (err.response) {

@@ -9,15 +9,21 @@ import { selectUser } from "../stores/user";
 import Api from "../lib/api";
 
 function PrintStars(props) {
-  const num = parseFloat(props.number);
-  if (num > 4) {
+  const num = Math.round(parseFloat(props.number));
+  if (num === 6) {
+    return <div id="rating">{props.number}<StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>
+  } else if (num === 5) {
     return <div id="rating">{props.number}<StarIcon /><StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>
-  } else if (num > 3) {
+  } else if (num === 4) {
     return <div id="rating">{props.number}<StarIcon /><StarIcon /><StarIcon /><StarIcon /></div>
-  } else if (num > 2) {
+  } else if (num === 3) {
     return <div id="rating">{props.number}<StarIcon /><StarIcon /><StarIcon /></div>
+  } else if (num === 2) {
+    return <div id="rating">{props.number}<StarIcon /><StarIcon /></div>
+  } else if (num === 1) {
+    return <div id="rating">{props.number}<StarIcon /></div>
   }
-  return <div id="rating">{props.number}<StarIcon /></div>
+  return <div id="rating">{props.number}</div>
 }
 
 // props: name price description

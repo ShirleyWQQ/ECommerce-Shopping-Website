@@ -1,19 +1,31 @@
-import React, { useState, useMemo } from 'react';
-import Pagination from './Pagination';
-import ProductCard from "./ProductCard";;
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState, useMemo, useEffect } from 'react';
+// import Pagination from './Pagination';
+import ProductCard from "./ProductCard";
+import { usePagination, DOTS } from './usePagination';
+import Pagination from 'react-bootstrap/Pagination';
 
-let PageSize = 10;
 
 // props: data(product[])
 export default function ProductList(props) {
+  const PageSize = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     return props.data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, JSON.stringify(props.data)]);
+  }, [currentPage, props.data]);
 
+  const paginationRange = usePagination({
+    currentPage,
+    totalCount: props.data.length,
+    siblingCount: 1,
+    pageSize: PageSize
+  });
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [props.data]);
   return (
     <div>
       <div className="flex-container" style={{ gap: "15px 20px" }}>
@@ -29,13 +41,13 @@ export default function ProductList(props) {
           />
         ))}
       </div>
-        <Pagination
-          className="pagination-bar"
-          currentPage={currentPage}
-          totalCount={props.data.length}
-          pageSize={PageSize}
-          onPageChange={page => setCurrentPage(page)}
-        />
+      <Pagination>
+        {paginationRange.map(page => {
+          if (page === currentPage) return <Pagination.Item active>{page}</Pagination.Item>
+          else if (page === DOTS) return <Pagination.Ellipsis disabled />
+          else return <Pagination.Item onClick={() => { setCurrentPage(page) }}>{page}</Pagination.Item>
+        })}
+      </Pagination>
     </div>
   );
 }

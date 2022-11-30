@@ -17,7 +17,6 @@ export default function ProductPage() {
   const [rating, setRating] = useState("");
   const [content, setContent] = useState("");
 
-
   const deleteComment = (cid) => {
     Api.deleteComment(cid)
       .then(() => {
@@ -31,7 +30,6 @@ export default function ProductPage() {
       .catch(Api.logError);
   };
   const addComment = () => {
-    debugger;
     Api.addComment(user.user_id, parseInt(product_id), parseInt(rating), content)
       .then(res => {
         Api.getProduct(product_id)
@@ -94,7 +92,6 @@ export default function ProductPage() {
         ? <Form>
           <Form.Label style={{ fontWeight: "500" }} className="font-weight-bold">Rating</Form.Label>
           <Form.Select aria-label="Default select example" onChange={e => setRating(e.target.value)}>
-            <option>My rating is: </option>
             <option value="1">★Run away now</option>
             <option value="2">★★Buy it unless you get no other choice</option>
             <option value="3">★★★Just so so</option>

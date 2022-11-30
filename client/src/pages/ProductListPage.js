@@ -47,7 +47,7 @@ export default function ProductListPage() {
         <div style={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
           <div style={{ display: "flex", flexDirection: "row", marginLeft: "40%", alignItems: "center", minWidth: "500px" }}>
             <Form.Control onChange={e => setSearchWord(e.target.value)} placeholder="Enter product name" />
-            <p style={{minWidth: "150px", marginLeft: "20px", marginTop: "15px" }}>Displaying <b>{products.length}</b> item{products.length !== 1 ? "s" : ""}</p>
+            <p style={{minWidth: "350px", marginLeft: "20px", marginTop: "15px" }}>Displaying <b>{products.length}</b> item{products.length !== 1 ? "s" : ""}</p>
           </div>
           <ProductSort sortOptions={sortOptions} onSelect={sortOnSelect} />
         </div>

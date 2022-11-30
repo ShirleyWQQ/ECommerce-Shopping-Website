@@ -14,7 +14,7 @@ export default function ProductFilter(props) {
 
   // }, [darkMode]);
 
-  
+
   const [priceBegin, setPriceBegin] = useState("");
   const [priceEnd, setPriceEnd] = useState("");
   const [displayErrorForPrice, setDisplayErrorForPrice] = useState(false);
@@ -95,7 +95,7 @@ export default function ProductFilter(props) {
       </Form>
       <p className="font-weight-bold" id="filter">Filter by Price Range</p>
       <Form>
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ display: "flex", flexDirection: "row", maxWidth:"220px" }}>
           <InputGroup size="sm" className="mb-3">
             <InputGroup.Text id="inputGroup-sizing-sm">$</InputGroup.Text>
             <Form.Control

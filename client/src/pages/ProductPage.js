@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Product from "../components/Product";
 import Comment from "../components/Comment";
@@ -91,8 +91,13 @@ export default function ProductPage() {
     }
   }, [user, comments]);
   return (
-    <div>
+
+    <div style={{ marginLeft: "3%" }}>
+        {/*<p style="margin-left: 0.5em; "></p>*/}
+        <br />
+        <br />
       {product
+
         ? <Product
           name={product.product_name}
           price={product.price}
@@ -124,6 +129,7 @@ export default function ProductPage() {
       <br />
       {user
         ? <Form>
+
           <Form.Label style={{ fontWeight: "500" }} className="font-weight-bold">Rating</Form.Label>
           <Form.Select aria-label="Default select example" value={rating} onChange={e => setRating(e.target.value)}>
             <option value="1">★Run away now</option>

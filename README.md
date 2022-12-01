@@ -35,4 +35,17 @@
   - Deletion of product for admin
   - Deletion of comment for user
 - R9:
-  - Rating of a product would update if a comment is deleted
+  - Rating of a product would update if a comment is deleted / added / updated
+- R10:
+  - Add/remove items to/from shopping cart
+  - Change in cart item quantity
+- R11:
+  - Search product by name
+- R12:
+  - Improved UI and layout of the application
+- R13:
+  - Dark Mode now can be turned on and off
+- R14:
+  - Product listing now have pagiantion with 10 items per page
+- R15:
+  - User can register and login

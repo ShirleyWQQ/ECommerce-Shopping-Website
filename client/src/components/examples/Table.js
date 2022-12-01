@@ -32,17 +32,17 @@ export default class ServerCheck extends React.Component {
   render() {
     return (
       <div className="flex-container">
-              {this.state.products.map(item => (
-                <div className="card" style={{width: '18rem'}}>
-                  <img className="card-img-top" src="logo192.png" alt="Card image cap" />
-                  <div className="card-body">
-                    <h5 className="card-title0">{item.product_id}</h5>
-                    <h5 className="card-title1">{item.product_name}</h5>
-                    <h5 className="card-title2">${item.price}</h5>
-                    <div><Counter1></Counter1></div>
-                  </div>
-                </div>
-              ))}
+        {this.state.products.map(item => (
+          <div className="card" style={{ width: '18rem' }}>
+            <img className="card-img-top" src="logo192.png" alt="Card image cap" />
+            <div className="card-body">
+              <h5 className="card-title0">{item.product_id}</h5>
+              <h5 className="card-title1">{item.product_name}</h5>
+              <h5 className="card-title2">${item.price}</h5>
+              <div><Counter1></Counter1></div>
+            </div>
+          </div>
+        ))}
       </div>
     );
   }

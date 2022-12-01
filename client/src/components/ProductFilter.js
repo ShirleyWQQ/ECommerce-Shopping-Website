@@ -88,7 +88,7 @@ export default function ProductFilter(props) {
       </Form>
       <p className="font-weight-bold" id="filter">Filter by Price Range</p>
       <Form>
-        <div style={{ display: "flex", flexDirection: "row", maxWidth:"220px" }}>
+        <div style={{ display: "flex", flexDirection: "row", maxWidth: "220px" }}>
           <InputGroup size="sm" className="mb-3">
             <InputGroup.Text id="inputGroup-sizing-sm">$</InputGroup.Text>
             <Form.Control
